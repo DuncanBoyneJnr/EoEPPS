@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<BaseLayout title="Schedule" description="The full schedule for the East of England Power Platform Summit 2026 - 1st & 2nd May 2026, Norwich.">
+  <Hero
+    title="Schedule"
+    subtitle="Two days of Power Platform content in Norwich."
+  />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+
+      <!-- Day 1 -->
+      <div id="day1" class="mb-16">
+        <div class="flex items-center mb-8">
+          <div class="bg-primary text-white rounded-xl px-6 py-4 mr-6 text-center min-w-24">
+            <div class="text-sm font-semibold text-white/80">Friday</div>
+            <div class="text-3xl font-bold">1st</div>
+            <div class="text-sm text-white/80">May</div>
+          </div>
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold text-text">Day 1: Workshop Day</h2>
+            <div class="flex items-center text-text-light mt-2 flex-wrap gap-4">
+              <div class="flex items-center">
+                <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>9:00 AM – 4:30 PM</span>
+              </div>
+              <div class="flex items-center">
+                <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>
+                  Townshend House, 30 Crown Rd, Norwich NR1 3DT &bull;
+                  <a href="https://share.google/0XFQL3ShPVJXjfstT" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline ml-1">
+                    Map<span class="sr-only"> (opens in new tab)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg border border-border overflow-hidden">
+          <div class="bg-primary/5 px-6 py-4 border-b border-border">
+            <p class="text-text-light">
+              Day 1 is a hands-on workshop day. Bring your laptop and get ready to build! Detailed workshop information will be announced closer to the event.
+            </p>
+          </div>
+
+          <div class="divide-y divide-border">
+            <!-- Registration -->
+            <div class="flex items-start px-6 py-5">
+              <div class="w-24 flex-shrink-0 text-sm font-medium text-text-light pt-1">09:00</div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-1">
+                  <span class="inline-block px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">Registration</span>
+                </div>
+                <div class="font-semibold text-text">Registration &amp; Welcome Coffee</div>
+                <div class="text-text-light text-sm mt-1">Arrive, register, and grab a coffee before the day begins.</div>
+              </div>
+            </div>
+
+            <!-- Welcome -->
+            <div class="flex items-start px-6 py-5">
+              <div class="w-24 flex-shrink-0 text-sm font-medium text-text-light pt-1">09:30</div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-1">
+                  <span class="inline-block px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">Welcome</span>
+                </div>
+                <div class="font-semibold text-text">Welcome &amp; Housekeeping</div>
+                <div class="text-text-light text-sm mt-1">Introduction to the day from the EoEPPS organising team.</div>
+              </div>
+            </div>
+
+            <!-- Workshop 1 -->
+            <div class="flex items-start px-6 py-5">
+              <div class="w-24 flex-shrink-0 text-sm font-medium text-text-light pt-1">10:00</div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-1">
+                  <span class="inline-block px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">Workshop</span>
+                  <span class="inline-block px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">TBA</span>
+                </div>
+                <div class="font-semibold text-text">Morning Workshop</div>
+                <div class="text-text-light text-sm mt-1">Workshop details and speaker to be announced. Topics will cover core Power Platform tools.</div>
+              </div>
+            </div>
+
+            <!-- Lunch -->
+            <div class="flex items-start px-6 py-5 bg-background-alt">
+              <div class="w-24 flex-shrink-0 text-sm font-medium text-text-light pt-1">12:30</div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-1">
+                  <span class="inline-block px-2 py-0.5 bg-secondary/10 text-secondary text-xs rounded-full">Break</span>
+                </div>
+                <div class="font-semibold text-text">Lunch &amp; Networking</div>
+                <div class="text-text-light text-sm mt-1">Lunch provided. A great opportunity to connect with fellow attendees.</div>
+              </div>
+            </div>
+
+            <!-- Workshop 2 -->
+            <div class="flex items-start px-6 py-5">
+              <div class="w-24 flex-shrink-0 text-sm font-medium text-text-light pt-1">13:30</div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-1">
+                  <span class="inline-block px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">Workshop</span>
+                  <span class="inline-block px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">TBA</span>
+                </div>
+                <div class="font-semibold text-text">Afternoon Workshop</div>
+                <div class="text-text-light text-sm mt-1">Workshop details and speaker to be announced.</div>
+              </div>
+            </div>
+
+            <!-- Close -->
+            <div class="flex items-start px-6 py-5">
+              <div class="w-24 flex-shrink-0 text-sm font-medium text-text-light pt-1">16:00</div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-1">
+                  <span class="inline-block px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full">Close</span>
+                </div>
+                <div class="font-semibold text-text">Wrap Up &amp; Close</div>
+                <div class="text-text-light text-sm mt-1">Summary of the day and preview of Day 2. Venue closes at 4:30 PM.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div id="day2">
+        <div class="flex items-center mb-8">
+          <div class="bg-accent text-white rounded-xl px-6 py-4 mr-6 text-center min-w-24">
+            <div class="text-sm font-semibold text-white/80">Saturday</div>
+            <div class="text-3xl font-bold">2nd</div>
+            <div class="text-sm text-white/80">May</div>
+          </div>
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold text-text">Day 2: Conference Day</h2>
+            <div class="flex items-center text-text-light mt-2 flex-wrap gap-4">
+              <div class="flex items-center">
+                <svg class="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>8:00 AM – 5:30 PM</span>
+              </div>
+              <div class="flex items-center">
+                <svg class="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>
+                  The Space, Norwich &bull;
+                  <a href="https://maps.app.goo.gl/yZwjpQounUmR1Hz7A" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline ml-1">
+                    Map<span class="sr-only"> (opens in new tab)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sessionize schedule embed -->
+        <link rel="stylesheet" href="https://sessionize.com/api/v2/9q20ek5l/embedstyle" />
+        <div class="sessionize-embed mt-6">
+          <script is:inline src="https://sessionize.com/api/v2/9q20ek5l/view/GridSmart"></script>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal container required by Sessionize -->
+  <div id="sz-modal-container" class="is-hidden"></div>
+
+  <!-- Follow us CTA -->
+  <section class="py-12 bg-primary text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold mb-4">Stay Up to Date</h2>
+      <p class="text-white/90 mb-6 max-w-xl mx-auto">
+        Follow us on LinkedIn for speaker announcements and event updates.
+      </p>
+      <a
+        href="https://www.linkedin.com/company/eoepps/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors"
+      >
+        Follow on LinkedIn<span class="sr-only"> (opens in new tab)</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

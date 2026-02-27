@@ -1,0 +1,145 @@
+---
+const navLinks = [
+  { href: '/', label: 'Home' },
+  {
+    label: 'About',
+    href: '/about',
+    children: [
+      { href: '/about', label: 'About the Summit' },
+      { href: '/team', label: 'The Team' },
+    ]
+  },
+  { href: '/schedule', label: 'Schedule' },
+  { href: '/speakers', label: 'Speakers' },
+  {
+    label: 'Sponsors',
+    href: '/sponsors',
+    children: [
+      { href: '/sponsors', label: 'Our Sponsors' },
+      { href: '/sponsorship', label: 'Become a Sponsor' },
+    ]
+  },
+  { href: '/contact', label: 'Contact' },
+];
+
+const allLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About the Summit' },
+  { href: '/team', label: 'The Team' },
+  { href: '/schedule', label: 'Schedule' },
+  { href: '/speakers', label: 'Speakers' },
+  { href: '/sponsors', label: 'Our Sponsors' },
+  { href: '/sponsorship', label: 'Become a Sponsor' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="bg-primary text-white shadow-lg sticky top-0 z-50" role="banner">
+  <nav class="container mx-auto px-4 py-3" role="navigation" aria-label="Main navigation">
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center justify-center">
+      <!-- Logo / Title -->
+      <a href="/" class="hover:opacity-90 transition-opacity flex items-center mr-6">
+        <img src="/images/Logo.png" alt="East of England Power Platform Summit 2026" class="h-10 w-auto" />
+      </a>
+
+      <!-- All Navigation Links -->
+      <div class="flex items-center space-x-1">
+        {navLinks.map((link) => (
+          link.children ? (
+            <div class="relative group">
+              <a
+                href={link.href}
+                class:list={[
+                  'px-4 py-2 rounded-lg transition-colors h-10 flex items-center',
+                  currentPath === link.href || currentPath.startsWith(link.href + '/')
+                    ? 'bg-white/20 font-semibold'
+                    : 'hover:bg-white/10',
+                ]}
+              >
+                {link.label}
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+              <div class="absolute left-0 mt-1 w-52 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                {link.children.map((child) => (
+                  <a
+                    href={child.href}
+                    class:list={[
+                      'block px-4 py-2 text-text hover:bg-background-alt transition-colors first:rounded-t-lg last:rounded-b-lg',
+                      currentPath === child.href || currentPath.startsWith(child.href + '/') ? 'bg-primary/10 text-primary font-semibold' : '',
+                    ]}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={link.href}
+              class:list={[
+                'px-4 py-2 rounded-lg transition-colors h-10 flex items-center',
+                currentPath === link.href
+                  ? 'bg-white/20 font-semibold'
+                  : 'hover:bg-white/10',
+              ]}
+            >
+              {link.label}
+            </a>
+          )
+        ))}
+      </div>
+    </div>
+
+    <!-- Mobile: Logo and Menu Button -->
+    <div class="flex md:hidden items-center justify-between">
+      <a href="/" class="hover:opacity-90 transition-opacity">
+        <img src="/images/Logo.png" alt="East of England Power Platform Summit 2026" class="h-10 w-auto" />
+      </a>
+
+      <button
+        id="mobile-menu-button"
+        class="p-2 rounded-lg hover:bg-white/10 transition-colors"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-white/20 pt-4">
+      {allLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'block px-4 py-2 rounded-lg transition-colors text-center',
+            currentPath === link.href
+              ? 'bg-white/20 font-semibold'
+              : 'hover:bg-white/10',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<script>
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuButton?.addEventListener('click', () => {
+    const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>

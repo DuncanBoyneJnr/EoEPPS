@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SpeakerCard from '../components/SpeakerCard.astro';
+import { getCollection } from 'astro:content';
+
+const allSpeakers = await getCollection('speakers');
+const organizers = allSpeakers.filter(s => s.data.isOrganizer);
+---
+
+<BaseLayout title="The Team" description="Meet the team behind the East of England Power Platform Summit 2026.">
+  <Hero
+    title="The Team"
+    subtitle="Meet the volunteers making EoEPPS happen."
+  />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <p class="text-text-light text-lg max-w-2xl mx-auto">
+          EoEPPS is organised entirely by volunteers from the Norfolk Power Platform User Group community. We're passionate about growing the Power Platform community across the East of England.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {organizers.map((organizer) => (
+          <SpeakerCard
+            name={organizer.data.name}
+            title={organizer.data.title}
+            company={organizer.data.company}
+            bio={organizer.data.bio}
+            slug={organizer.slug}
+            image={organizer.data.image}
+            linkedin={organizer.data.linkedin}
+            twitter={organizer.data.twitter}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-primary text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Want to Help?</h2>
+      <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+        If you'd like to volunteer or get involved with organising EoEPPS, we'd love to hear from you.
+      </p>
+      <a
+        href="/contact"
+        class="inline-block bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors"
+      >
+        Get in Touch
+      </a>
+    </div>
+  </section>
+</BaseLayout>

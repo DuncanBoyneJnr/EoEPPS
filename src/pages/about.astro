@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SpeakerCard from '../components/SpeakerCard.astro';
+import { getCollection } from 'astro:content';
+
+const allSpeakers = await getCollection('speakers');
+const organizers = allSpeakers.filter(s => s.data.isOrganizer);
+---
+
+<BaseLayout title="About" description="Learn about the East of England Power Platform Summit 2026 - our mission, the team, and what to expect.">
+  <Hero
+    title="About EoEPPS"
+    subtitle="The East of England's inaugural Power Platform Summit."
+  />
+
+  <!-- What is EoEPPS -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-text mb-6">What is EoEPPS?</h2>
+        <p class="text-lg text-text-light mb-6">
+          The East of England Power Platform Summit (EoEPPS) is a community-led, two-day conference bringing together Power Platform professionals, enthusiasts, and newcomers from across the East of England and beyond.
+        </p>
+        <p class="text-lg text-text-light mb-6">
+          Organised by the team behind the <a href="https://www.nppug.co.uk" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Norfolk Power Platform User Group</a>, EoEPPS is designed to provide a larger platform for the region's growing Power Platform community — with hands-on workshops on Day 1 and a full conference programme on Day 2.
+        </p>
+        <p class="text-lg text-text-light mb-6">
+          Whether you're just getting started with Power Apps, building complex automation with Power Automate, creating insights with Power BI, or exploring the world of Copilot Studio — there's something at EoEPPS for you.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8 my-12">
+          <div class="bg-white p-6 rounded-xl shadow-lg border border-border">
+            <h3 class="text-xl font-bold text-text mb-3">Your Two Days</h3>
+            <ul class="space-y-3 text-text-light">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Day 1 at Townshend House: choose a hands-on workshop and spend the day building something real</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Day 2 at The Space: a full conference programme with parallel tracks and a keynote</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Talks from practitioners who work with Power Platform every day in real businesses</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>An exhibition area on Day 2 with sponsors and vendors to browse during breaks</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-primary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>A friendly, inclusive atmosphere — no experience required to get something out of it</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl shadow-lg border border-border">
+            <h3 class="text-xl font-bold text-text mb-3">Who's Coming</h3>
+            <ul class="space-y-3 text-text-light">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-secondary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                </svg>
+                <span>Power Platform users from East of England organisations looking to deepen their skills</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-secondary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                </svg>
+                <span>Developers curious about low-code, pro-code, and everything in between</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-secondary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                </svg>
+                <span>Business analysts and IT leaders evaluating Power Platform for their organisation</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-secondary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                </svg>
+                <span>Students and career-changers exploring the Microsoft ecosystem</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-secondary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                </svg>
+                <span>NPPUG regulars ready to experience the community at summit scale</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Event Stats -->
+        <div class="grid md:grid-cols-3 gap-8 my-12 bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl p-8">
+          <div class="text-center">
+            <div class="text-4xl font-bold text-primary mb-2">2</div>
+            <div class="text-text-light">Full Days</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-primary mb-2">Free</div>
+            <div class="text-text-light">Conference Day (Sat)</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-primary mb-2">Norwich</div>
+            <div class="text-text-light">1st &amp; 2nd May 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Organisers -->
+  <section class="py-16 bg-background-alt">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-text mb-4">Meet the Organisers</h2>
+        <p class="text-text-light text-lg max-w-2xl mx-auto">
+          EoEPPS is organised by the volunteer team behind the Norfolk Power Platform User Group.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {organizers.map((organizer) => (
+          <SpeakerCard
+            name={organizer.data.name}
+            title={organizer.data.title}
+            company={organizer.data.company}
+            bio={organizer.data.bio}
+            slug={organizer.slug}
+            image={organizer.data.image}
+            linkedin={organizer.data.linkedin}
+            twitter={organizer.data.twitter}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- NPPUG Connection -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-text mb-6">About the Norfolk Power Platform User Group</h2>
+        <p class="text-lg text-text-light mb-8">
+          EoEPPS is organised by the Norfolk Power Platform User Group — a community of Microsoft Power Platform enthusiasts based in Norwich and Norfolk who run monthly meetups throughout the year.
+        </p>
+        <a
+          href="https://www.nppug.co.uk"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-dark transition-colors"
+        >
+          Visit nppug.co.uk<span class="sr-only"> (opens in new tab)</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-br from-primary to-accent text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Get Involved</h2>
+      <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+        Attend or sponsor — follow us on LinkedIn for speaker announcements and event updates.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="https://www.linkedin.com/company/eoepps/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors"
+        >
+          Follow on LinkedIn<span class="sr-only"> (opens in new tab)</span>
+        </a>
+        <a
+          href="/sponsorship"
+          class="inline-block border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-colors"
+        >
+          Become a Sponsor
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

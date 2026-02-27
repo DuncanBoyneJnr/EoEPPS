@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<BaseLayout title="Sessions" description="Browse all sessions at the East of England Power Platform Summit 2026.">
+  <Hero
+    title="Sessions"
+    subtitle="Explore what's on at EoEPPS 2026."
+  />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <link rel="stylesheet" href="https://sessionize.com/api/v2/9q20ek5l/embedstyle" />
+      <script is:inline src="https://sessionize.com/api/v2/9q20ek5l/view/Sessions"></script>
+    </div>
+  </section>
+
+  <!-- Modal container required by Sessionize -->
+  <div id="sz-modal-container" class="is-hidden"></div>
+
+  <!-- View Schedule CTA -->
+  <section class="py-12 bg-primary text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold mb-4">See When Sessions Are On</h2>
+      <p class="text-white/90 mb-6 max-w-xl mx-auto">
+        View the full timetable to plan which sessions to attend across each track.
+      </p>
+      <a
+        href="/schedule"
+        class="inline-block bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors"
+      >
+        View the Schedule
+      </a>
+    </div>
+  </section>
+</BaseLayout>

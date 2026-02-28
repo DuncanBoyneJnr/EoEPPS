@@ -15,8 +15,8 @@ const { name, title, company, bio, slug, image, linkedin, twitter } = Astro.prop
 const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
 ---
 
-<article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow border border-border">
-  <div class="p-6">
+<article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow border border-border flex flex-col">
+  <div class="p-6 flex flex-col flex-1">
     <div class="flex items-start space-x-4">
       <!-- Avatar -->
       <div class="flex-shrink-0">
@@ -44,11 +44,11 @@ const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
       </div>
     </div>
 
-    <p class="text-text-light mt-4 line-clamp-3">
+    <p class="text-text-light mt-4 line-clamp-3 flex-1">
       {bio}
     </p>
 
-    <div class="mt-4 flex items-center justify-between">
+    <div class="mt-4 pt-4 border-t border-border flex items-center justify-between">
       <a
         href={`/speakers/${slug}`}
         class="inline-flex items-center text-primary font-semibold hover:text-primary-dark transition-colors"

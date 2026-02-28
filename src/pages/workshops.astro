@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+
+const TICKETING_URL = 'https://eoeppstickets.netlify.app';
+---
+
+<BaseLayout title="Workshops" description="Join us for a full day of hands-on Power Platform workshops on Friday 1st May 2026 at Townshend House, Norwich.">
+  <Hero
+    title="Workshop Day"
+    subtitle="Friday 1st May 2026 · Townshend House, Norwich · Ticketed"
+  />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+      <!-- Day info banner -->
+      <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 mb-12 flex flex-col md:flex-row items-start md:items-center gap-4">
+        <div class="flex-1">
+          <h2 class="text-xl font-bold text-text mb-1">Hands-on learning — Day 1</h2>
+          <p class="text-text-light">Small-group workshops with expert facilitators. Places are limited — secure yours early.</p>
+        </div>
+        <a
+          href={TICKETING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex-shrink-0 inline-block bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary-dark transition-colors"
+        >
+          Book your place<span class="sr-only"> (opens in new tab)</span>
+        </a>
+      </div>
+
+      <!-- Loading state -->
+      <div id="workshops-loading" class="text-center py-16">
+        <div class="inline-block w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p class="text-text-light">Loading workshops…</p>
+      </div>
+
+      <!-- Workshop cards -->
+      <div id="workshops-grid" class="hidden space-y-6"></div>
+
+      <!-- No workshops yet -->
+      <div id="workshops-empty" class="hidden text-center py-16">
+        <p class="text-text-light text-lg mb-2">Workshops will be announced soon.</p>
+        <p class="text-text-light">Check back shortly or follow us on <a href="https://www.linkedin.com/company/eoepps/" target="_blank" rel="noopener noreferrer" class="text-primary font-semibold hover:underline">LinkedIn</a> for updates.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-br from-primary to-accent text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Learn?</h2>
+      <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+        Workshop places are limited. Register on the ticketing app to secure yours.
+      </p>
+      <a
+        href={TICKETING_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors"
+      >
+        Go to ticketing app<span class="sr-only"> (opens in new tab)</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const PROJECT_ID = 'eoepps-tickets';
+  const API_KEY = 'AIzaSyDyvttRMwHF2U2fGEcWYJ5k8lQq-iMAA3s';
+  const BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
+  const TICKETING_URL = 'https://eoeppstickets.netlify.app';
+
+  function val(field: any) {
+    if (!field) return null;
+    return field.stringValue ?? field.integerValue ?? field.doubleValue ?? field.booleanValue ?? field.timestampValue ?? null;
+  }
+
+  function arrayVal(field: any): string[] {
+    return field?.arrayValue?.values?.map((v: any) => v.stringValue).filter(Boolean) ?? [];
+  }
+
+  function formatTime(isoOrTimestamp: string) {
+    if (!isoOrTimestamp) return '';
+    const d = new Date(isoOrTimestamp);
+    if (isNaN(d.getTime())) return '';
+    return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
+  }
+
+  async function fetchWorkshops() {
+    const res = await fetch(`${BASE}:runQuery?key=${API_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        structuredQuery: {
+          from: [{ collectionId: 'sessions' }],
+          where: {
+            fieldFilter: {
+              field: { fieldPath: 'type' },
+              op: 'EQUAL',
+              value: { stringValue: 'workshop' },
+            },
+          },
+          orderBy: [{ field: { fieldPath: 'startTime' }, direction: 'ASCENDING' }],
+        },
+      }),
+    });
+    const rows = await res.json();
+    return rows
+      .filter((r: any) => r.document)
+      .map((r: any) => {
+        const f = r.document.fields;
+        return {
+          id: r.document.name.split('/').pop(),
+          title: val(f.title) ?? '',
+          abstract: val(f.abstract) ?? '',
+          startTime: val(f.startTime) ?? '',
+          endTime: val(f.endTime) ?? '',
+          capacity: f.capacity ? Number(val(f.capacity)) : null,
+          price: f.price ? Number(val(f.price)) : 0,
+          speakerIds: arrayVal(f.speakerIds),
+        };
+      });
+  }
+
+  async function fetchSpeakers(ids: string[]) {
+    const results = await Promise.all(
+      ids.map(async (id) => {
+        try {
+          const res = await fetch(`${BASE}/speakers/${id}?key=${API_KEY}`);
+          const data = await res.json();
+          const f = data.fields;
+          return {
+            id,
+            name: `${val(f.firstName) ?? ''} ${val(f.lastName) ?? ''}`.trim(),
+            photoUrl: val(f.photoUrl) ?? '',
+          };
+        } catch {
+          return { id, name: '', photoUrl: '' };
+        }
+      })
+    );
+    return Object.fromEntries(results.map((s) => [s.id, s]));
+  }
+
+  async function render() {
+    const loading = document.getElementById('workshops-loading')!;
+    const grid = document.getElementById('workshops-grid')!;
+    const empty = document.getElementById('workshops-empty')!;
+
+    try {
+      const workshops = await fetchWorkshops();
+
+      if (workshops.length === 0) {
+        loading.classList.add('hidden');
+        empty.classList.remove('hidden');
+        return;
+      }
+
+      // Collect all unique speaker IDs
+      const allSpeakerIds = [...new Set(workshops.flatMap((w: any) => w.speakerIds))];
+      const speakerMap = await fetchSpeakers(allSpeakerIds);
+
+      grid.innerHTML = workshops.map((w: any) => {
+        const speakers = w.speakerIds.map((id: string) => speakerMap[id]?.name).filter(Boolean);
+        const timeStr = w.startTime && w.endTime
+          ? `${formatTime(w.startTime)} – ${formatTime(w.endTime)}`
+          : '';
+        const isFree = !w.price || w.price === 0;
+        const priceStr = isFree ? 'Free' : `£${Number(w.price).toFixed(2)}`;
+        const capacityStr = w.capacity ? `${w.capacity} places` : '';
+
+        return `
+          <div class="bg-white rounded-xl shadow-md border border-border overflow-hidden">
+            <div class="flex flex-col md:flex-row">
+              <div class="bg-primary p-6 md:w-48 flex-shrink-0 flex flex-col justify-center items-center text-center text-white">
+                <div class="text-2xl font-bold">${timeStr || 'TBC'}</div>
+                <div class="text-white/70 text-sm mt-1">Fri 1 May</div>
+                <div class="mt-4 text-lg font-bold text-secondary">${priceStr}</div>
+                ${capacityStr ? `<div class="text-white/70 text-xs mt-1">${capacityStr}</div>` : ''}
+              </div>
+              <div class="p-6 flex-1">
+                <h3 class="text-xl font-bold text-text mb-1">${w.title}</h3>
+                ${speakers.length > 0 ? `<p class="text-primary font-medium mb-3">with ${speakers.join(' &amp; ')}</p>` : ''}
+                ${w.abstract ? `<p class="text-text-light text-sm leading-relaxed mb-4 line-clamp-3">${w.abstract}</p>` : ''}
+                <a
+                  href="${TICKETING_URL}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-block bg-primary text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-primary-dark transition-colors"
+                >
+                  Book your place →
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      loading.classList.add('hidden');
+      grid.classList.remove('hidden');
+    } catch (err) {
+      console.error('Failed to load workshops:', err);
+      loading.classList.add('hidden');
+      empty.classList.remove('hidden');
+    }
+  }
+
+  render();
+</script>

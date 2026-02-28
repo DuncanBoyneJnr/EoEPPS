@@ -6,6 +6,24 @@ import { getCollection } from 'astro:content';
 
 const allSpeakers = await getCollection('speakers');
 const organizers = allSpeakers.filter(s => s.data.isOrganizer);
+
+// Fetch speaker photos from Sessionize to use for organizers who are also conference speakers
+let sessionizeSpeakerPhotos: Record<string, string> = {};
+try {
+  const res = await fetch('https://sessionize.com/api/v2/9q20ek5l/view/Speakers?format=json');
+  if (res.ok) {
+    const data = await res.json();
+    // Sessionize returns an array of speaker objects with profilePicture field
+    for (const sp of data) {
+      const fullName = `${sp.firstName ?? ''} ${sp.lastName ?? ''}`.trim();
+      if (fullName && sp.profilePicture) {
+        sessionizeSpeakerPhotos[fullName] = sp.profilePicture;
+      }
+    }
+  }
+} catch (e) {
+  // Sessionize unavailable at build time — fall back to local images
+}
 ---
 
 <BaseLayout title="The Team" description="Meet the team behind the East of England Power Platform Summit 2026.">
@@ -23,18 +41,22 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-        {organizers.map((organizer) => (
-          <SpeakerCard
-            name={organizer.data.name}
-            title={organizer.data.title}
-            company={organizer.data.company}
-            bio={organizer.data.bio}
-            slug={organizer.slug}
-            image={organizer.data.image}
-            linkedin={organizer.data.linkedin}
-            twitter={organizer.data.twitter}
-          />
-        ))}
+        {organizers.map((organizer) => {
+          const sessionizePhoto = sessionizeSpeakerPhotos[organizer.data.name];
+          const photo = sessionizePhoto || organizer.data.image;
+          return (
+            <SpeakerCard
+              name={organizer.data.name}
+              title={organizer.data.title}
+              company={organizer.data.company}
+              bio={organizer.data.bio}
+              slug={organizer.slug}
+              image={photo}
+              linkedin={organizer.data.linkedin}
+              twitter={organizer.data.twitter}
+            />
+          );
+        })}
       </div>
     </div>
   </section>

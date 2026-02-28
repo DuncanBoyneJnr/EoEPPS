@@ -1,11 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
-import SpeakerCard from '../../components/SpeakerCard.astro';
-import { getCollection } from 'astro:content';
-
-const allSpeakers = await getCollection('speakers');
-const organizers = allSpeakers.filter(s => s.data.isOrganizer);
 ---
 
 <BaseLayout title="Speakers" description="Meet the speakers at the East of England Power Platform Summit 2026.">
@@ -25,33 +20,6 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
       </div>
       <link rel="stylesheet" href="https://sessionize.com/api/v2/9q20ek5l/embedstyle" />
       <script is:inline src="https://sessionize.com/api/v2/9q20ek5l/view/SpeakerWall"></script>
-    </div>
-  </section>
-
-  <!-- Organising Team -->
-  <section class="py-16 bg-background-alt">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-text mb-4">The Organising Team</h2>
-        <p class="text-text-light text-lg max-w-2xl mx-auto">
-          EoEPPS is organised by the volunteer team from the Norfolk Power Platform User Group.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-        {organizers.map((organizer) => (
-          <SpeakerCard
-            name={organizer.data.name}
-            title={organizer.data.title}
-            company={organizer.data.company}
-            bio={organizer.data.bio}
-            slug={organizer.slug}
-            image={organizer.data.image}
-            linkedin={organizer.data.linkedin}
-            twitter={organizer.data.twitter}
-          />
-        ))}
-      </div>
     </div>
   </section>
 

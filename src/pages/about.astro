@@ -30,7 +30,7 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
         </p>
 
         <div class="grid md:grid-cols-2 gap-8 my-12">
-          <div class="bg-white p-6 rounded-xl shadow-lg border border-border">
+          <div class="about-card bg-white p-6 rounded-xl shadow-lg border border-border">
             <h3 class="text-xl font-bold text-text mb-3">Your Two Days</h3>
             <ul class="space-y-3 text-text-light">
               <li class="flex items-start">
@@ -66,7 +66,7 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
             </ul>
           </div>
 
-          <div class="bg-white p-6 rounded-xl shadow-lg border border-border">
+          <div class="about-card bg-white p-6 rounded-xl shadow-lg border border-border">
             <h3 class="text-xl font-bold text-text mb-3">Who's Coming</h3>
             <ul class="space-y-3 text-text-light">
               <li class="flex items-start">
@@ -195,3 +195,15 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .about-card {
+    border-top: 4px solid transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-top-color 0.2s ease;
+  }
+  .about-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -4px rgba(236, 72, 153, 0.2), 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+    border-top-color: #EC4899;
+  }
+</style>

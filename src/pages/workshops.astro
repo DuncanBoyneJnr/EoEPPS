@@ -74,15 +74,15 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
   }
   .workshop-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px -4px rgba(91, 33, 182, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.08);
-    border-top-color: #5B21B6;
+    box-shadow: 0 12px 32px -4px rgba(251, 191, 36, 0.25), 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+    border-top-color: #FBBF24;
   }
 </style>
 
 <script>
   const PROJECT_ID = import.meta.env.PUBLIC_FIREBASE_PROJECT_ID;
   const API_KEY = import.meta.env.PUBLIC_FIREBASE_API_KEY;
-  const BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
+  const BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents`;
   const TICKETING_URL = 'https://eoeppstickets.netlify.app';
 
   function val(field: any) {

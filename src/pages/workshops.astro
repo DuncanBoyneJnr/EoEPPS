@@ -67,6 +67,16 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
   </section>
 </BaseLayout>
 
+<style>
+  .workshop-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .workshop-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -4px rgba(91, 33, 182, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+  }
+</style>
+
 <script>
   const PROJECT_ID = import.meta.env.PUBLIC_FIREBASE_PROJECT_ID;
   const API_KEY = import.meta.env.PUBLIC_FIREBASE_API_KEY;
@@ -173,7 +183,7 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
         const capacityStr = w.capacity ? `${w.capacity} places` : '';
 
         return `
-          <div class="bg-white rounded-xl shadow-md border border-border overflow-hidden">
+          <div class="workshop-card bg-white rounded-xl shadow-md border border-border overflow-hidden">
             <div class="flex flex-col md:flex-row">
               <div class="bg-primary p-6 md:w-48 flex-shrink-0 flex flex-col justify-center items-center text-center text-white">
                 <div class="text-2xl font-bold">${timeStr || 'TBC'}</div>

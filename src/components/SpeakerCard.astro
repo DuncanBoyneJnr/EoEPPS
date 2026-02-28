@@ -15,7 +15,7 @@ const { name, title, company, bio, slug, image, linkedin, twitter } = Astro.prop
 const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
 ---
 
-<article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow border border-border flex flex-col">
+<article class="bg-white rounded-xl shadow-lg overflow-hidden border border-border flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_32px_-4px_rgba(91,33,182,0.15),0_4px_12px_-2px_rgba(0,0,0,0.08)]">
   <div class="p-6 flex flex-col flex-1">
     <div class="flex items-start space-x-4">
       <!-- Avatar -->

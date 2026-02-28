@@ -68,8 +68,8 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
 </BaseLayout>
 
 <script>
-  const PROJECT_ID = 'eoepps-tickets';
-  const API_KEY = 'AIzaSyDyvttRMwHF2U2fGEcWYJ5k8lQq-iMAA3s';
+  const PROJECT_ID = import.meta.env.PUBLIC_FIREBASE_PROJECT_ID;
+  const API_KEY = import.meta.env.PUBLIC_FIREBASE_API_KEY;
   const BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
   const TICKETING_URL = 'https://eoeppstickets.netlify.app';
 

@@ -517,19 +517,29 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Mobile: tighten translations */
+  /* Mobile: text above logos */
   @media (max-width: 640px) {
+    /* Push logos into the lower portion of the screen */
+    .intro-logo-eoepps,
+    .intro-logo-mentoring {
+      width: 38vw;
+      top: 68%;
+    }
+    /* Pull text container up into the upper portion */
+    .intro-center {
+      top: 26%;
+    }
     @keyframes eoeppsIn {
-      0%   { opacity: 0; filter: blur(28px); transform: translate(-50%, -60%) scale(1.06); }
-      22%  { opacity: 1; filter: blur(0);    transform: translate(-50%, -60%) scale(1); }
-      42%  { opacity: 1; filter: blur(0);    transform: translate(-50%, -60%) scale(1); }
-      100% { opacity: 1; filter: blur(0);    transform: translate(calc(-50% - 28vw), -60%) scale(0.88); }
+      0%   { opacity: 0; filter: blur(28px); transform: translate(-50%, -50%) scale(1.06); }
+      22%  { opacity: 1; filter: blur(0);    transform: translate(-50%, -50%) scale(1); }
+      42%  { opacity: 1; filter: blur(0);    transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 1; filter: blur(0);    transform: translate(calc(-50% - 24vw), -50%) scale(0.88); }
     }
     @keyframes mentoringIn {
-      0%   { opacity: 0; filter: blur(28px) brightness(0) invert(1); transform: translate(-50%, -60%) scale(1.06); }
-      25%  { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(-50%, -60%) scale(1); }
-      45%  { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(-50%, -60%) scale(1); }
-      100% { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(calc(-50% + 28vw), -60%) scale(0.88); }
+      0%   { opacity: 0; filter: blur(28px) brightness(0) invert(1); transform: translate(-50%, -50%) scale(1.06); }
+      25%  { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(-50%, -50%) scale(1); }
+      45%  { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(calc(-50% + 24vw), -50%) scale(0.88); }
     }
     .intro-title { font-size: clamp(1.4rem, 6vw, 2rem); }
   }

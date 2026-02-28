@@ -80,81 +80,54 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
 </style>
 
 <script>
-  const PROJECT_ID = import.meta.env.PUBLIC_FIREBASE_PROJECT_ID;
-  const API_KEY = import.meta.env.PUBLIC_FIREBASE_API_KEY;
-  const BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents`;
+  import { initializeApp, getApps } from 'firebase/app';
+  import { getFirestore, collection, query, where, orderBy, getDocs, doc, getDoc } from 'firebase/firestore';
+
   const TICKETING_URL = 'https://eoeppstickets.netlify.app';
 
-  function val(field: any) {
-    if (!field) return null;
-    return field.stringValue ?? field.integerValue ?? field.doubleValue ?? field.booleanValue ?? field.timestampValue ?? null;
-  }
+  const firebaseConfig = {
+    apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY,
+    authDomain: 'eoepps-tickets.firebaseapp.com',
+    projectId: import.meta.env.PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: 'eoepps-tickets.firebasestorage.app',
+    messagingSenderId: '846064456782',
+    appId: '1:846064456782:web:133ff91f29568addf15f1f',
+  };
 
-  function arrayVal(field: any): string[] {
-    return field?.arrayValue?.values?.map((v: any) => v.stringValue).filter(Boolean) ?? [];
-  }
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const db = getFirestore(app, 'default');
 
-  function formatTime(isoOrTimestamp: string) {
-    if (!isoOrTimestamp) return '';
-    const d = new Date(isoOrTimestamp);
+  function formatTime(ts: any) {
+    if (!ts) return '';
+    const d = ts.toDate ? ts.toDate() : new Date(ts);
     if (isNaN(d.getTime())) return '';
     return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
   }
 
   async function fetchWorkshops() {
-    const res = await fetch(`${BASE}:runQuery?key=${API_KEY}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        structuredQuery: {
-          from: [{ collectionId: 'sessions' }],
-          where: {
-            fieldFilter: {
-              field: { fieldPath: 'type' },
-              op: 'EQUAL',
-              value: { stringValue: 'workshop' },
-            },
-          },
-          orderBy: [{ field: { fieldPath: 'startTime' }, direction: 'ASCENDING' }],
-        },
-      }),
-    });
-    const rows = await res.json();
-    return rows
-      .filter((r: any) => r.document)
-      .map((r: any) => {
-        const f = r.document.fields;
-        return {
-          id: r.document.name.split('/').pop(),
-          title: val(f.title) ?? '',
-          abstract: val(f.abstract) ?? '',
-          startTime: val(f.startTime) ?? '',
-          endTime: val(f.endTime) ?? '',
-          capacity: f.capacity ? Number(val(f.capacity)) : null,
-          price: f.price ? Number(val(f.price)) : 0,
-          speakerIds: arrayVal(f.speakerIds),
-        };
-      });
+    const q = query(
+      collection(db, 'sessions'),
+      where('type', '==', 'workshop'),
+      orderBy('startTime', 'asc')
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
   }
 
   async function fetchSpeakers(ids: string[]) {
     const results = await Promise.all(
       ids.map(async (id) => {
         try {
-          const res = await fetch(`${BASE}/speakers/${id}?key=${API_KEY}`);
-          const data = await res.json();
-          const f = data.fields;
-          return {
-            id,
-            name: `${val(f.firstName) ?? ''} ${val(f.lastName) ?? ''}`.trim(),
-            photoUrl: val(f.photoUrl) ?? '',
-          };
+          const snap = await getDoc(doc(db, 'speakers', id));
+          if (!snap.exists()) return { id, name: '', photoUrl: '' };
+          const d = snap.data();
+          return { id, name: `${d.firstName ?? ''} ${d.lastName ?? ''}`.trim(), photoUrl: d.photoUrl ?? '' };
         } catch {
           return { id, name: '', photoUrl: '' };
         }
       })
     );
-    return Object.fromEntries(results.map((s) => [s.id, s]));
+    return Object.fromEntries(results.map(s => [s.id, s]));
   }
 
   async function render() {

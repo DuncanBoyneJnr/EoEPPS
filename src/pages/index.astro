@@ -539,21 +539,27 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
   const overlay = document.getElementById('intro-overlay');
   const btn = document.getElementById('intro-enter');
 
-  // Lock scroll
-  document.body.classList.add('intro-active');
+  // Skip intro if already seen this session (e.g. pressing home button)
+  if (sessionStorage.getItem('introSeen')) {
+    overlay?.remove();
+  } else {
+    // Lock scroll
+    document.body.classList.add('intro-active');
 
-  function dismiss() {
-    if (!overlay) return;
-    overlay.classList.add('dismiss');
-    document.body.classList.remove('intro-active');
-    setTimeout(() => overlay.remove(), 850);
+    function dismiss() {
+      if (!overlay) return;
+      sessionStorage.setItem('introSeen', '1');
+      overlay.classList.add('dismiss');
+      document.body.classList.remove('intro-active');
+      setTimeout(() => overlay.remove(), 850);
+    }
+
+    // Enable button after it fades in
+    setTimeout(() => btn?.classList.add('ready'), 8200);
+
+    btn?.addEventListener('click', dismiss);
+
+    // Pressing any key also skips/enters
+    document.addEventListener('keydown', dismiss, { once: true });
   }
-
-  // Enable button after it fades in
-  setTimeout(() => btn?.classList.add('ready'), 8200);
-
-  btn?.addEventListener('click', dismiss);
-
-  // Pressing any key also skips/enters
-  document.addEventListener('keydown', dismiss, { once: true });
 </script>

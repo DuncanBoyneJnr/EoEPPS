@@ -11,65 +11,75 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
   <!-- Hero Section -->
   <section class="bg-gradient-to-br from-primary via-primary-dark to-accent text-white py-16 md:py-24">
     <div class="container mx-auto px-4">
-      <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-        <!-- Left: text -->
-        <div class="flex-1 text-center md:text-left">
-          <p class="text-secondary font-bold text-lg md:text-xl mb-3 uppercase tracking-wide">
+        <!-- Logo — top on mobile, right on desktop -->
+        <div class="flex justify-center lg:order-2">
+          <img
+            src="/images/Logo.png"
+            alt="EoEPPS Logo"
+            class="w-56 sm:w-72 lg:w-full lg:max-w-md h-auto drop-shadow-2xl"
+          />
+        </div>
+
+        <!-- Text — below logo on mobile, left on desktop -->
+        <div class="text-center lg:text-left lg:order-1">
+          <p class="text-secondary font-bold text-lg md:text-xl mb-4 uppercase tracking-wide">
             1st &amp; 2nd May 2026 &bull; Norwich, Norfolk
           </p>
           <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
             East of England<br />Power Platform Summit
           </h1>
-          <p class="text-lg text-white/85 mb-6 max-w-xl">
+          <p class="text-lg text-white/85 mb-8 max-w-xl mx-auto lg:mx-0">
             The East of England's flagship Power Platform conference. Two days of sessions, workshops, and networking.
           </p>
 
           <!-- Partnership -->
-          <div class="flex flex-col sm:flex-row items-center md:items-start gap-3 mb-8">
-            <span class="text-white/80 text-base font-semibold whitespace-nowrap">Proudly in partnership with</span>
-            <a href="https://thementoringhub.org/" target="_blank" rel="noopener noreferrer" class="flex-shrink-0">
+          <div class="border-t border-white/25 pt-6">
+            <p class="text-white/80 text-lg font-semibold mb-4 uppercase tracking-wide">Proudly in partnership with</p>
+            <a
+              href="https://thementoringhub.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block"
+            >
               <img
                 src="/images/sponsors/TheMentoringHub.svg"
                 alt="The Mentoring Hub"
-                class="h-10 w-auto brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
+                class="h-16 md:h-20 w-auto brightness-0 invert opacity-90 hover:opacity-100 transition-opacity mx-auto lg:mx-0"
               />
             </a>
           </div>
-
-          <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <a
-              href="https://eoeppstickets.netlify.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-block bg-secondary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary-light transition-colors shadow-lg"
-            >
-              Get Tickets<span class="sr-only"> (opens in new tab)</span>
-            </a>
-            <a
-              href="/speakers"
-              class="inline-block bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg"
-            >
-              Meet the Speakers
-            </a>
-            <a
-              href="/about"
-              class="inline-block border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-colors"
-            >
-              Learn More
-            </a>
-          </div>
         </div>
 
-        <!-- Right: logo -->
-        <div class="flex-shrink-0 flex justify-center">
-          <img
-            src="/images/Logo.png"
-            alt="EoEPPS Logo"
-            class="w-64 md:w-80 lg:w-96 h-auto drop-shadow-2xl"
-          />
-        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- CTA Buttons -->
+  <section class="bg-white py-8 shadow-md">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href="https://eoeppstickets.netlify.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto inline-block bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-dark transition-colors shadow-md text-center"
+        >
+          Get Tickets<span class="sr-only"> (opens in new tab)</span>
+        </a>
+        <a
+          href="/speakers"
+          class="w-full sm:w-auto inline-block bg-secondary text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:opacity-90 transition-opacity shadow-md text-center"
+        >
+          Meet the Speakers
+        </a>
+        <a
+          href="/about"
+          class="w-full sm:w-auto inline-block border-2 border-primary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary/5 transition-colors text-center"
+        >
+          Learn More
+        </a>
       </div>
     </div>
   </section>

@@ -186,12 +186,12 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
 
       loading.classList.add('hidden');
       grid.classList.remove('hidden');
-    } catch (err) {
-      console.error('Failed to load workshops:', err);
+    } catch (err: any) {
+      console.error('❌ Workshop load error:', err?.code, err?.message, err);
       loading.classList.add('hidden');
       empty.classList.remove('hidden');
     }
   }
 
-  render();
+  render().then(() => console.log('✅ Workshop render complete'));
 </script>

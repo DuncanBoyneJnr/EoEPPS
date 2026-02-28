@@ -8,6 +8,19 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
 ---
 
 <BaseLayout title="Home">
+
+  <!-- ======= INTRO OVERLAY ======= -->
+  <div id="intro-overlay">
+    <img class="intro-logo-eoepps" src="/images/Logo.png" alt="East of England Power Platform Summit" />
+    <img class="intro-logo-mentoring" src="/images/sponsors/TheMentoringHub.svg" alt="The Mentoring Hub" />
+    <div class="intro-center">
+      <h1 class="intro-title">East of England<br/>Power Platform Summit</h1>
+      <p class="intro-date">1st &amp; 2nd May 2026 &bull; Norwich, Norfolk</p>
+      <button class="intro-enter" id="intro-enter">Enter</button>
+    </div>
+  </div>
+  <!-- ======= / INTRO OVERLAY ======= -->
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-br from-primary via-primary-dark to-accent text-white py-16 md:py-24">
     <div class="container mx-auto px-4">
@@ -15,22 +28,10 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
 
         <!-- Logos — top on mobile, right on desktop -->
         <div class="flex justify-center items-center gap-6 lg:order-2 flex-wrap">
-          <div class="logo-sticker">
-            <img
-              src="/images/Logo.png"
-              alt="EoEPPS Logo"
-              class="w-44 sm:w-56 lg:w-64 h-auto"
-            />
-          </div>
-          <div class="logo-sticker">
-            <a href="https://thementoringhub.org/" target="_blank" rel="noopener noreferrer">
-              <img
-                src="/images/sponsors/TheMentoringHub.svg"
-                alt="The Mentoring Hub"
-                class="w-44 sm:w-56 lg:w-64 h-auto brightness-0 invert"
-              />
-            </a>
-          </div>
+          <img src="/images/Logo.png" alt="EoEPPS Logo" class="w-44 sm:w-56 lg:w-64 h-auto drop-shadow-xl" />
+          <a href="https://thementoringhub.org/" target="_blank" rel="noopener noreferrer">
+            <img src="/images/sponsors/TheMentoringHub.svg" alt="The Mentoring Hub" class="w-44 sm:w-56 lg:w-64 h-auto brightness-0 invert drop-shadow-xl" />
+          </a>
         </div>
 
         <!-- Text — below logos on mobile, left on desktop -->
@@ -395,45 +396,164 @@ const organizers = allSpeakers.filter(s => s.data.isOrganizer);
   </section>
 </BaseLayout>
 
-<style>
-  .logo-sticker {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    transform-origin: 20% 15%;
-    transition:
-      transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-      filter 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+<style is:global>
+  /* Lock scroll while intro is showing */
+  body.intro-active {
+    overflow: hidden;
   }
 
-  .logo-sticker:hover {
-    transform: perspective(700px) rotateZ(-4deg) rotateX(7deg) rotateY(4deg);
-    filter: drop-shadow(10px 20px 30px rgba(0, 0, 0, 0.6));
+  /* ── Overlay ── */
+  #intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #1a0538 0%, #3b0764 35%, #5b21b6 70%, #7c3aed 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    overflow: hidden;
+    transition: opacity 0.8s ease;
   }
-
-  /* Peeled corner fold — bottom-right triangle */
-  .logo-sticker::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    background: linear-gradient(
-      225deg,
-      rgba(255, 255, 255, 0.92) 30%,
-      rgba(120, 80, 180, 0.35) 50%,
-      transparent 50%
-    );
-    border-radius: 0 0 4px 0;
+  #intro-overlay.dismiss {
+    opacity: 0;
     pointer-events: none;
-    transition:
-      width 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-      height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .logo-sticker:hover::after {
-    width: 80px;
-    height: 80px;
+  /* ── EoEPPS logo: fades in centre → slides left ── */
+  .intro-logo-eoepps {
+    position: absolute;
+    width: min(32vw, 360px);
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    animation: eoeppsIn 5.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+  }
+  @keyframes eoeppsIn {
+    0%   { opacity: 0; filter: blur(28px); transform: translate(-50%, -50%) scale(1.06); }
+    22%  { opacity: 1; filter: blur(0);    transform: translate(-50%, -50%) scale(1); }
+    42%  { opacity: 1; filter: blur(0);    transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 1; filter: blur(0);    transform: translate(calc(-50% - 30vw), -50%) scale(0.92); }
+  }
+
+  /* ── Mentoring Hub logo: fades in centre → slides right ── */
+  .intro-logo-mentoring {
+    position: absolute;
+    width: min(32vw, 360px);
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    filter: brightness(0) invert(1);
+    animation: mentoringIn 4.5s cubic-bezier(0.4, 0, 0.2, 1) 3.2s forwards;
+  }
+  @keyframes mentoringIn {
+    0%   { opacity: 0; filter: blur(28px) brightness(0) invert(1); transform: translate(-50%, -50%) scale(1.06); }
+    25%  { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(-50%, -50%) scale(1); }
+    45%  { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(calc(-50% + 30vw), -50%) scale(0.92); }
+  }
+
+  /* ── Centre text container ── */
+  .intro-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: min(90vw, 680px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    pointer-events: none;
+  }
+
+  /* ── Event title ── */
+  .intro-title {
+    font-size: clamp(1.6rem, 4.5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0;
+    opacity: 0;
+    animation: riseIn 1s ease 7s forwards;
+  }
+  .intro-date {
+    font-size: clamp(0.9rem, 2vw, 1.15rem);
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+    margin: 0;
+    opacity: 0;
+    animation: riseIn 1s ease 7.4s forwards;
+  }
+
+  /* ── Enter button ── */
+  .intro-enter {
+    margin-top: 1rem;
+    padding: 0.9rem 3.5rem;
+    background: white;
+    color: #4c1d95;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    animation: riseIn 0.9s ease 8.2s forwards;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .intro-enter:hover {
+    background: #ede9fe;
+    transform: scale(1.04);
+  }
+  .intro-enter.ready {
+    pointer-events: auto;
+  }
+
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Mobile: tighten translations */
+  @media (max-width: 640px) {
+    @keyframes eoeppsIn {
+      0%   { opacity: 0; filter: blur(28px); transform: translate(-50%, -60%) scale(1.06); }
+      22%  { opacity: 1; filter: blur(0);    transform: translate(-50%, -60%) scale(1); }
+      42%  { opacity: 1; filter: blur(0);    transform: translate(-50%, -60%) scale(1); }
+      100% { opacity: 1; filter: blur(0);    transform: translate(calc(-50% - 28vw), -60%) scale(0.88); }
+    }
+    @keyframes mentoringIn {
+      0%   { opacity: 0; filter: blur(28px) brightness(0) invert(1); transform: translate(-50%, -60%) scale(1.06); }
+      25%  { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(-50%, -60%) scale(1); }
+      45%  { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(-50%, -60%) scale(1); }
+      100% { opacity: 1; filter: blur(0)    brightness(0) invert(1); transform: translate(calc(-50% + 28vw), -60%) scale(0.88); }
+    }
+    .intro-title { font-size: clamp(1.4rem, 6vw, 2rem); }
   }
 </style>
+
+<script>
+  const overlay = document.getElementById('intro-overlay');
+  const btn = document.getElementById('intro-enter');
+
+  // Lock scroll
+  document.body.classList.add('intro-active');
+
+  function dismiss() {
+    if (!overlay) return;
+    overlay.classList.add('dismiss');
+    document.body.classList.remove('intro-active');
+    setTimeout(() => overlay.remove(), 850);
+  }
+
+  // Enable button after it fades in
+  setTimeout(() => btn?.classList.add('ready'), 8200);
+
+  btn?.addEventListener('click', dismiss);
+
+  // Pressing any key also skips/enters
+  document.addEventListener('keydown', dismiss, { once: true });
+</script>

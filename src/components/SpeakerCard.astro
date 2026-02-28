@@ -15,7 +15,7 @@ const { name, title, company, bio, slug, image, linkedin, twitter } = Astro.prop
 const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
 ---
 
-<article class="bg-white rounded-xl shadow-lg overflow-hidden border border-border flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_32px_-4px_rgba(91,33,182,0.15),0_4px_12px_-2px_rgba(0,0,0,0.08)]">
+<article class="speaker-card bg-white rounded-xl shadow-lg overflow-hidden border border-border flex flex-col">
   <div class="p-6 flex flex-col flex-1">
     <div class="flex items-start space-x-4">
       <!-- Avatar -->
@@ -90,3 +90,15 @@ const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
     </div>
   </div>
 </article>
+
+<style>
+  .speaker-card {
+    border-top: 4px solid transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-top-color 0.2s ease;
+  }
+  .speaker-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -4px rgba(91, 33, 182, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+    border-top-color: #5B21B6;
+  }
+</style>

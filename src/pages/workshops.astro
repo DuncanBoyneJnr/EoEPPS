@@ -149,37 +149,45 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
       const speakerMap = await fetchSpeakers(allSpeakerIds);
 
       grid.innerHTML = workshops.map((w: any) => {
-        const speakers = w.speakerIds.map((id: string) => speakerMap[id]?.name).filter(Boolean);
+        const speakers = (w.speakerIds || []).map((id: string) => speakerMap[id]).filter(Boolean);
+        const speakerNames = speakers.map((s: any) => s.name).filter(Boolean);
         const timeStr = w.startTime && w.endTime
           ? `${formatTime(w.startTime)} – ${formatTime(w.endTime)}`
           : '';
         const isFree = !w.price || w.price === 0;
         const priceStr = isFree ? 'Free' : `£${Number(w.price).toFixed(2)}`;
         const capacityStr = w.capacity ? `${w.capacity} places` : '';
+        const sessionUrl = `${TICKETING_URL}/sessions/${w.id}`;
+
+        const speakerAvatarsHtml = speakers.length > 0 ? `
+          <div class="flex items-center gap-2 mb-3">
+            <div class="flex -space-x-2">
+              ${speakers.map((s: any) => s.photoUrl
+                ? `<img src="${s.photoUrl}" alt="${s.name}" class="w-8 h-8 rounded-full object-cover border-2 border-white shadow-sm" />`
+                : `<div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center border-2 border-white">${s.name.split(' ').map((n: string) => n[0]).slice(0, 2).join('')}</div>`
+              ).join('')}
+            </div>
+            <p class="text-primary font-medium text-sm">with ${speakerNames.join(' &amp; ')}</p>
+          </div>` : '';
 
         return `
           <div class="workshop-card bg-white rounded-xl shadow-md border border-border overflow-hidden">
-            <div class="flex flex-col md:flex-row">
+            <a href="${sessionUrl}" target="_blank" rel="noopener noreferrer" class="flex flex-col md:flex-row group">
               <div class="bg-primary p-6 md:w-48 flex-shrink-0 flex flex-col justify-center items-center text-center text-white">
-                <div class="text-2xl font-bold">${timeStr || 'TBC'}</div>
+                <div class="text-2xl font-bold leading-tight">${timeStr || 'TBC'}</div>
                 <div class="text-white/70 text-sm mt-1">Fri 1 May</div>
                 <div class="mt-4 text-lg font-bold text-secondary">${priceStr}</div>
                 ${capacityStr ? `<div class="text-white/70 text-xs mt-1">${capacityStr}</div>` : ''}
               </div>
               <div class="p-6 flex-1">
-                <h3 class="text-xl font-bold text-text mb-1">${w.title}</h3>
-                ${speakers.length > 0 ? `<p class="text-primary font-medium mb-3">with ${speakers.join(' &amp; ')}</p>` : ''}
-                ${w.abstract ? `<p class="text-text-light text-sm leading-relaxed mb-4 line-clamp-3">${w.abstract}</p>` : ''}
-                <a
-                  href="${TICKETING_URL}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-block bg-primary text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-primary-dark transition-colors"
-                >
+                <h3 class="text-xl font-bold text-text mb-1 group-hover:text-primary transition-colors">${w.title}</h3>
+                ${speakerAvatarsHtml}
+                ${w.abstract ? `<p class="text-text-light text-sm leading-relaxed mb-4">${w.abstract}</p>` : ''}
+                <span class="inline-block bg-primary text-white px-5 py-2 rounded-lg font-semibold text-sm group-hover:bg-primary-dark transition-colors">
                   Book your place →
-                </a>
+                </span>
               </div>
-            </div>
+            </a>
           </div>
         `;
       }).join('');

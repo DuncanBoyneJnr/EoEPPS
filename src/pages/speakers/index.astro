@@ -1,5 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const workshopSpeakers = (await getCollection('speakers'))
+  .filter(s => !s.data.isOrganizer)
+  .sort((a, b) => a.data.name.localeCompare(b.data.name));
 ---
 
 <BaseLayout title="Speakers" description="Meet the speakers at the East of England Power Platform Summit 2026.">
@@ -52,6 +57,47 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <!-- Modal container required by Sessionize -->
   <div id="sz-modal-container" class="is-hidden"></div>
+
+  <!-- Workshop Presenters -->
+  {workshopSpeakers.length > 0 && (
+    <section class="py-16 bg-background-alt">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-text mb-4">Workshop Presenters</h2>
+          <p class="text-text-light text-lg max-w-2xl mx-auto">
+            Expert facilitators leading hands-on workshops on Friday 1st May.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {workshopSpeakers.map(speaker => {
+            const initials = speaker.data.name.split(' ').map((n: string) => n[0]).join('').toUpperCase();
+            return (
+              <a
+                href={`/speakers/${speaker.slug}`}
+                class="group flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm border border-border hover:shadow-md hover:border-primary/30 transition-all"
+              >
+                {speaker.data.image ? (
+                  <img
+                    src={speaker.data.image}
+                    alt={speaker.data.name}
+                    class="w-24 h-24 rounded-full object-cover border-2 border-border mb-4 group-hover:border-primary transition-colors"
+                  />
+                ) : (
+                  <div class="w-24 h-24 rounded-full bg-primary text-white text-2xl font-bold flex items-center justify-center mb-4">
+                    {initials}
+                  </div>
+                )}
+                <h3 class="font-bold text-text text-lg group-hover:text-primary transition-colors">{speaker.data.name}</h3>
+                {speaker.data.company && (
+                  <p class="text-text-light text-sm mt-1">{speaker.data.company}</p>
+                )}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- View Schedule CTA -->
   <section class="py-16 bg-primary text-white">

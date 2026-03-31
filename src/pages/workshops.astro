@@ -12,7 +12,7 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
   />
 
   <section class="py-16">
-    <div class="container mx-auto px-4 max-w-5xl">
+    <div class="container mx-auto px-4 max-w-6xl">
 
       <!-- Day info banner -->
       <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 mb-12 flex flex-col md:flex-row items-start md:items-center gap-4">
@@ -36,8 +36,8 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
         <p class="text-text-light">Loading workshops…</p>
       </div>
 
-      <!-- Workshop cards -->
-      <div id="workshops-grid" class="hidden space-y-6"></div>
+      <!-- Workshop cards grid -->
+      <div id="workshops-grid" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
 
       <!-- No workshops yet -->
       <div id="workshops-empty" class="hidden text-center py-16">
@@ -65,17 +65,38 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
       </a>
     </div>
   </section>
+
+  <!-- Detail modal -->
+  <div id="workshop-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <!-- Backdrop -->
+    <div id="modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <!-- Panel -->
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+      <!-- Close button -->
+      <button id="modal-close" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-800 transition-colors" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+          <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+        </svg>
+      </button>
+      <!-- Modal content injected by JS -->
+      <div id="modal-content" class="p-6 sm:p-8"></div>
+    </div>
+  </div>
 </BaseLayout>
 
 <style is:global>
   .workshop-card {
-    border-top: 4px solid transparent;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-top-color 0.2s ease;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    border-top: 3px solid transparent;
   }
   .workshop-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px -4px rgba(251, 191, 36, 0.25), 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -4px rgba(91, 33, 182, 0.18), 0 2px 8px -2px rgba(0,0,0,0.08);
     border-top-color: #FBBF24;
+  }
+  #workshop-modal.open {
+    display: flex;
   }
 </style>
 
@@ -130,6 +151,86 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
     return Object.fromEntries(results.map(s => [s.id, s]));
   }
 
+  function initials(name: string) {
+    return name.split(' ').map((n: string) => n[0]).slice(0, 2).join('');
+  }
+
+  function avatarHtml(s: any, px = 32) {
+    const dim = `width:${px}px;height:${px}px;min-width:${px}px;`;
+    return s.photoUrl
+      ? `<img src="${s.photoUrl}" alt="${s.name}" style="${dim}" class="rounded-full object-cover border-2 border-white shadow-sm" />`
+      : `<div style="${dim}font-size:${Math.round(px * 0.35)}px;" class="rounded-full bg-primary text-white font-bold flex items-center justify-center border-2 border-white">${initials(s.name)}</div>`;
+  }
+
+  // Store workshop data for modal access
+  let allWorkshops: any[] = [];
+  let speakerMap: Record<string, any> = {};
+
+  function openModal(workshopId: string) {
+    const w = allWorkshops.find(w => w.id === workshopId);
+    if (!w) return;
+
+    const modal = document.getElementById('workshop-modal')!;
+    const content = document.getElementById('modal-content')!;
+    const speakers = (w.speakerIds || []).map((id: string) => speakerMap[id]).filter(Boolean);
+    const speakerNames = speakers.map((s: any) => s.name).filter(Boolean);
+    const timeStr = w.startTime && w.endTime
+      ? `${formatTime(w.startTime)} – ${formatTime(w.endTime)}`
+      : 'Time TBC';
+    const FULL_PRICE = 75;
+    const isFree = !w.price || w.price === 0;
+    const currentPrice = Number(w.price);
+    const isOnSale = !isFree && currentPrice < FULL_PRICE;
+    const modalPriceBadge = isFree
+      ? `<span class="inline-block bg-secondary/20 text-secondary-dark px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Free</span>`
+      : isOnSale
+        ? `<span class="inline-flex items-center gap-1.5 bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+            <span class="line-through text-text-light font-normal">£${FULL_PRICE.toFixed(2)}</span>
+            £${currentPrice.toFixed(2)} — Sale
+           </span>`
+        : `<span class="inline-block bg-secondary/20 text-secondary-dark px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">£${currentPrice.toFixed(2)}</span>`;
+    const capacityStr = w.capacity ? `${w.capacity} places` : '';
+    const sessionUrl = `${TICKETING_URL}/sessions/${w.id}`;
+
+    const speakerBioHtml = speakers.length > 0 ? `
+      <div class="flex flex-wrap gap-4 mb-5">
+        ${speakers.map((s: any) => `
+          <div class="flex items-center gap-3">
+            ${avatarHtml(s, 40)}
+            <span class="font-semibold text-text text-sm">${s.name}</span>
+          </div>
+        `).join('')}
+      </div>` : '';
+
+    content.innerHTML = `
+      <div class="flex flex-wrap items-start gap-3 mb-4">
+        ${modalPriceBadge}
+        ${capacityStr ? `<span class="inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">${capacityStr}</span>` : ''}
+        <span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium">Full day · Fri 1 May</span>
+      </div>
+      <h2 class="text-xl sm:text-2xl font-bold text-text mb-4 leading-tight">${w.title}</h2>
+      ${speakerBioHtml}
+      ${w.abstract ? `<p class="text-text-light text-sm leading-relaxed mb-6">${w.abstract}</p>` : ''}
+      <a
+        href="${sessionUrl}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block w-full text-center bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary-dark transition-colors"
+      >
+        Book your place →<span class="sr-only"> (opens in new tab)</span>
+      </a>
+    `;
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('workshop-modal')!;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   async function render() {
     const loading = document.getElementById('workshops-loading')!;
     const grid = document.getElementById('workshops-grid')!;
@@ -144,53 +245,65 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
         return;
       }
 
-      // Collect all unique speaker IDs
-      const allSpeakerIds = [...new Set(workshops.flatMap((w: any) => w.speakerIds))];
-      const speakerMap = await fetchSpeakers(allSpeakerIds);
+      allWorkshops = workshops;
+
+      const allSpeakerIds = [...new Set(workshops.flatMap((w: any) => w.speakerIds ?? []))] as string[];
+      speakerMap = await fetchSpeakers(allSpeakerIds);
 
       grid.innerHTML = workshops.map((w: any) => {
         const speakers = (w.speakerIds || []).map((id: string) => speakerMap[id]).filter(Boolean);
         const speakerNames = speakers.map((s: any) => s.name).filter(Boolean);
-        const timeStr = w.startTime && w.endTime
-          ? `${formatTime(w.startTime)} – ${formatTime(w.endTime)}`
-          : '';
+        const FULL_PRICE = 75;
         const isFree = !w.price || w.price === 0;
-        const priceStr = isFree ? 'Free' : `£${Number(w.price).toFixed(2)}`;
-        const capacityStr = w.capacity ? `${w.capacity} places` : '';
-        const sessionUrl = `${TICKETING_URL}/sessions/${w.id}`;
+        const currentPrice = Number(w.price);
+        const isOnSale = !isFree && currentPrice < FULL_PRICE;
+        const priceHtml = isFree
+          ? `<span class="text-secondary font-bold text-sm">Free</span>`
+          : isOnSale
+            ? `<span class="flex items-baseline gap-1.5">
+                <span class="text-white/50 text-xs line-through">£${FULL_PRICE.toFixed(2)}</span>
+                <span class="text-secondary font-bold text-sm">£${currentPrice.toFixed(2)}</span>
+               </span>`
+            : `<span class="text-secondary font-bold text-sm">£${currentPrice.toFixed(2)}</span>`;
+        const keywords: string[] = w.keywords ?? w.tags ?? [];
+        const keywordsHtml = keywords.length > 0
+          ? `<div class="flex flex-wrap gap-1 mt-2">${keywords.map((k: string) => `<span class="inline-block bg-primary/8 text-primary text-xs px-2 py-0.5 rounded-full">${k}</span>`).join('')}</div>`
+          : '';
 
-        const speakerAvatarsHtml = speakers.length > 0 ? `
-          <div class="flex items-center gap-2 mb-3">
+        const avatarsHtml = speakers.length > 0 ? `
+          <div class="flex items-center gap-2 mt-auto pt-3">
             <div class="flex -space-x-2">
-              ${speakers.map((s: any) => s.photoUrl
-                ? `<img src="${s.photoUrl}" alt="${s.name}" class="w-8 h-8 rounded-full object-cover border-2 border-white shadow-sm" />`
-                : `<div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center border-2 border-white">${s.name.split(' ').map((n: string) => n[0]).slice(0, 2).join('')}</div>`
-              ).join('')}
+              ${speakers.map((s: any) => avatarHtml(s, 28)).join('')}
             </div>
-            <p class="text-primary font-medium text-sm">with ${speakerNames.join(' &amp; ')}</p>
+            <span class="text-text-light text-xs truncate">${speakerNames.join(' & ')}</span>
           </div>` : '';
 
         return `
-          <div class="workshop-card bg-white rounded-xl shadow-md border border-border overflow-hidden">
-            <a href="${sessionUrl}" target="_blank" rel="noopener noreferrer" class="flex flex-col md:flex-row group">
-              <div class="bg-primary p-6 md:w-48 flex-shrink-0 flex flex-col justify-center items-center text-center text-white">
-                <div class="text-2xl font-bold leading-tight">${timeStr || 'TBC'}</div>
-                <div class="text-white/70 text-sm mt-1">Fri 1 May</div>
-                <div class="mt-4 text-lg font-bold text-secondary">${priceStr}</div>
-                ${capacityStr ? `<div class="text-white/70 text-xs mt-1">${capacityStr}</div>` : ''}
-              </div>
-              <div class="p-6 flex-1">
-                <h3 class="text-xl font-bold text-text mb-1 group-hover:text-primary transition-colors">${w.title}</h3>
-                ${speakerAvatarsHtml}
-                ${w.abstract ? `<p class="text-text-light text-sm leading-relaxed mb-4">${w.abstract}</p>` : ''}
-                <span class="inline-block bg-primary text-white px-5 py-2 rounded-lg font-semibold text-sm group-hover:bg-primary-dark transition-colors">
-                  Book your place →
-                </span>
-              </div>
-            </a>
-          </div>
+          <button
+            class="workshop-card text-left bg-white rounded-xl shadow-sm border border-border overflow-hidden flex flex-col"
+            data-workshop-id="${w.id}"
+            aria-label="View details for ${w.title}"
+          >
+            <div class="bg-primary px-4 py-3 flex items-center justify-between">
+              <span class="text-white/80 text-xs font-medium">Full day workshop</span>
+              ${priceHtml}
+            </div>
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-text text-base leading-snug mb-1 line-clamp-3">${w.title}</h3>
+              ${keywordsHtml}
+              ${avatarsHtml}
+            </div>
+          </button>
         `;
       }).join('');
+
+      // Attach click handlers
+      grid.querySelectorAll('[data-workshop-id]').forEach(el => {
+        el.addEventListener('click', () => {
+          const id = (el as HTMLElement).dataset.workshopId!;
+          openModal(id);
+        });
+      });
 
       loading.classList.add('hidden');
       grid.classList.remove('hidden');
@@ -200,6 +313,11 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
       empty.classList.remove('hidden');
     }
   }
+
+  // Modal close handlers
+  document.getElementById('modal-close')!.addEventListener('click', closeModal);
+  document.getElementById('modal-backdrop')!.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
   render().then(() => console.log('✅ Workshop render complete'));
 </script>

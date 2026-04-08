@@ -103,7 +103,7 @@ html {
 }
 
 body {
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
   color: var(--color-text);
   background-color: var(--color-background);
 }

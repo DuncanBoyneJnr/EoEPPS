@@ -24,6 +24,9 @@ const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
           <img
             src={image}
             alt={name}
+            width="80"
+            height="80"
+            loading="lazy"
             class="w-20 h-20 rounded-full object-cover"
           />
         ) : (

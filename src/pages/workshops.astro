@@ -202,6 +202,18 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
         `).join('')}
       </div>` : '';
 
+    const videoId = w.videoUrl ? (w.videoUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?/]+)/) || [])[1] : null;
+    const videoHtml = videoId ? `
+      <div class="aspect-video rounded-lg overflow-hidden bg-black mb-6">
+        <iframe
+          src="https://www.youtube.com/embed/${videoId}"
+          title="${w.title}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          class="w-full h-full"
+        ></iframe>
+      </div>` : '';
+
     content.innerHTML = `
       <div class="flex flex-wrap items-start gap-3 mb-4">
         ${modalPriceBadge}
@@ -210,6 +222,7 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
       </div>
       <h2 class="text-xl sm:text-2xl font-bold text-text mb-4 leading-tight">${w.title}</h2>
       ${speakerBioHtml}
+      ${videoHtml}
       ${w.abstract ? `<p class="text-text-light text-sm leading-relaxed mb-6">${w.abstract}</p>` : ''}
       <a
         href="${sessionUrl}"

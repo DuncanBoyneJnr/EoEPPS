@@ -18,7 +18,7 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
       <div class="bg-primary/5 border border-primary/20 rounded-xl p-6 mb-12 flex flex-col md:flex-row items-start md:items-center gap-4">
         <div class="flex-1">
           <h2 class="text-xl font-bold text-text mb-1">Hands-on learning — Day 1</h2>
-          <p class="text-text-light">Small-group workshops with expert facilitators. Places are limited — secure yours early.</p>
+          <p class="text-text-light">Small-group workshops with expert facilitators.</p>
         </div>
         <a
           href={TICKETING_URL}
@@ -53,7 +53,7 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-4">Ready to Learn?</h2>
       <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-        Workshop places are limited. Register on the ticketing app to secure yours.
+        Register on the ticketing app to secure your place.
       </p>
       <a
         href={TICKETING_URL}
@@ -177,18 +177,11 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
     const timeStr = w.startTime && w.endTime
       ? `${formatTime(w.startTime)} – ${formatTime(w.endTime)}`
       : 'Time TBC';
-    const FULL_PRICE = 75;
     const isFree = !w.price || w.price === 0;
     const currentPrice = Number(w.price);
-    const isOnSale = !isFree && currentPrice < FULL_PRICE;
     const modalPriceBadge = isFree
       ? `<span class="inline-block bg-secondary/20 text-secondary-dark px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Free</span>`
-      : isOnSale
-        ? `<span class="inline-flex items-center gap-1.5 bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
-            <span class="line-through text-text-light font-normal">£${FULL_PRICE.toFixed(2)}</span>
-            £${currentPrice.toFixed(2)} — Sale
-           </span>`
-        : `<span class="inline-block bg-secondary/20 text-secondary-dark px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">£${currentPrice.toFixed(2)}</span>`;
+      : `<span class="inline-block bg-secondary/20 text-secondary-dark px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">£${currentPrice.toFixed(2)}</span>`;
     const capacityStr = w.capacity ? `${w.capacity} places` : '';
     const sessionUrl = `${TICKETING_URL}/sessions/${w.id}`;
 
@@ -266,18 +259,11 @@ const TICKETING_URL = 'https://eoeppstickets.netlify.app';
       grid.innerHTML = workshops.map((w: any) => {
         const speakers = (w.speakerIds || []).map((id: string) => speakerMap[id]).filter(Boolean);
         const speakerNames = speakers.map((s: any) => s.name).filter(Boolean);
-        const FULL_PRICE = 75;
         const isFree = !w.price || w.price === 0;
         const currentPrice = Number(w.price);
-        const isOnSale = !isFree && currentPrice < FULL_PRICE;
         const priceHtml = isFree
           ? `<span class="text-secondary font-bold text-sm">Free</span>`
-          : isOnSale
-            ? `<span class="flex items-baseline gap-1.5">
-                <span class="text-white/50 text-xs line-through">£${FULL_PRICE.toFixed(2)}</span>
-                <span class="text-secondary font-bold text-sm">£${currentPrice.toFixed(2)}</span>
-               </span>`
-            : `<span class="text-secondary font-bold text-sm">£${currentPrice.toFixed(2)}</span>`;
+          : `<span class="text-secondary font-bold text-sm">£${currentPrice.toFixed(2)}</span>`;
         const keywords: string[] = w.keywords ?? w.tags ?? [];
         const keywordsHtml = keywords.length > 0
           ? `<div class="flex flex-wrap gap-1 mt-2">${keywords.map((k: string) => `<span class="inline-block bg-primary/8 text-primary text-xs px-2 py-0.5 rounded-full">${k}</span>`).join('')}</div>`

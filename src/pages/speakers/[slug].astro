@@ -14,9 +14,30 @@ const { speaker } = Astro.props;
 const { Content } = await speaker.render();
 
 const initials = speaker.data.name.split(' ').map(n => n[0]).join('').toUpperCase();
+
+// Truncate bio to 155 chars for meta description
+const metaDescription = speaker.data.bio.length > 155
+  ? speaker.data.bio.slice(0, 152) + '…'
+  : speaker.data.bio;
+
+const pageDescription = `${speaker.data.name}${speaker.data.company ? ` from ${speaker.data.company}` : ''} — speaking at the East of England Power Platform Summit 2026, Norwich. ${metaDescription}`;
+
+// Person JSON-LD
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: speaker.data.name,
+  jobTitle: speaker.data.title,
+  ...(speaker.data.company && { worksFor: { '@type': 'Organization', name: speaker.data.company } }),
+  ...(speaker.data.image && { image: speaker.data.image }),
+  ...(speaker.data.linkedin && { sameAs: [speaker.data.linkedin] }),
+  ...(speaker.data.website && { url: speaker.data.website }),
+  description: speaker.data.bio,
+};
 ---
 
-<BaseLayout title={speaker.data.name} description={speaker.data.bio}>
+<BaseLayout title={speaker.data.name} description={pageDescription.slice(0, 155)}>
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
   <div class="bg-gradient-to-br from-primary via-primary-dark to-accent text-white py-16">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row items-center md:items-start gap-8">

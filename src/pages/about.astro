@@ -8,17 +8,16 @@ const allSpeakers = await getCollection('speakers');
 const findSpeaker = (slug: string) => allSpeakers.find(s => s.slug === slug);
 const founders  = [findSpeaker('duncan-boyne'), findSpeaker('adam-bezance')].filter(Boolean);
 const cofounders = [findSpeaker('gemma-peck')].filter(Boolean);
-const team = ['jon-russell', 'ian-tweedie', 'stuart-baxter', 'craig-white']
+const team = ['jon-russell', 'ian-tweedie', 'stuart-baxter']
   .map(slug => findSpeaker(slug)).filter(Boolean);
 
 const displayRoles: Record<string, { role: string; company: string }> = {
-  'duncan-boyne':  { role: 'Co-Founder',          company: '' },
+  'duncan-boyne':  { role: 'Co-Founder',          company: 'CPiO' },
   'adam-bezance':  { role: 'Co-Founder',           company: 'Robiquity' },
   'gemma-peck':    { role: 'Co-Founder',           company: 'Director, GTP Tech Recruitment' },
   'jon-russell':   { role: 'Speaker Coordinator',  company: 'Capgemini' },
   'ian-tweedie':   { role: 'Technical Lead',       company: 'Capgemini' },
-  'stuart-baxter': { role: 'Workshop Coordinator', company: '' },
-  'craig-white':   { role: 'Microsoft MVP',        company: 'Business Applications' },
+  'stuart-baxter': { role: 'Workshop Coordinator', company: 'Capgemini' },
 };
 ---
 

@@ -40,15 +40,15 @@ import Hero from '../components/Hero.astro';
 
       <!-- Community Sponsors -->
       <div class="mb-4 text-center">
-        <span class="inline-block bg-secondary text-gray-900 font-bold text-sm px-4 py-1 rounded-full uppercase tracking-wide">Community Sponsor</span>
+        <span class="inline-block bg-secondary text-gray-900 font-bold text-sm px-4 py-1 rounded-full uppercase tracking-wide">Community Sponsors</span>
       </div>
-      <div class="max-w-xl mx-auto mb-16">
-        <div class="sponsor-card-community bg-white rounded-xl shadow-md border border-gray-200 p-8 text-center">
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
+        <div class="sponsor-card-community bg-white rounded-xl shadow-md border border-gray-200 p-8 text-center flex flex-col">
           <div class="h-20 flex items-center justify-center mb-6">
             <img src="/images/sponsors/Powercademy.png" alt="Powercademy" width="613" height="196" loading="lazy" class="max-h-full max-w-full object-contain" />
           </div>
           <p class="font-bold text-text text-xl mb-2">Powercademy</p>
-          <p class="text-text-light mb-6">
+          <p class="text-text-light mb-6 flex-1">
             The Power Platform's Only Platform — practical, hands-on Power Platform, Copilot, and AI training for all skill levels.
           </p>
           <a
@@ -58,6 +58,42 @@ import Hero from '../components/Hero.astro';
             class="inline-block bg-secondary text-gray-900 px-6 py-2.5 rounded-lg font-semibold hover:opacity-90 transition-opacity"
           >
             Visit powercademy.com<span class="sr-only"> (opens in new tab)</span>
+          </a>
+        </div>
+
+        <div class="sponsor-card-community bg-white rounded-xl shadow-md border border-gray-200 p-8 text-center flex flex-col">
+          <div class="h-20 flex items-center justify-center mb-6">
+            <img src="/images/sponsors/PowerPagesMastery.png" alt="Power Pages Mastery" width="800" height="200" loading="lazy" class="max-h-full max-w-full object-contain" />
+          </div>
+          <p class="font-bold text-text text-xl mb-2">Power Pages Mastery</p>
+          <p class="text-text-light mb-6 flex-1">
+            A structured programme teaching Power Platform professionals how to deliver customer-facing portal projects with confidence — covering architecture, security, data modelling, and advanced customisation.
+          </p>
+          <a
+            href="https://francomusso.com/power-pages-course"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block bg-secondary text-gray-900 px-6 py-2.5 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+          >
+            Learn more<span class="sr-only"> (opens in new tab)</span>
+          </a>
+        </div>
+
+        <div class="sponsor-card-community bg-white rounded-xl shadow-md border border-gray-200 p-8 text-center flex flex-col">
+          <div class="h-20 flex items-center justify-center mb-6">
+            <img src="/images/sponsors/ExtraLife.png" alt="Extra Life" width="800" height="200" loading="lazy" class="max-h-full max-w-full object-contain" />
+          </div>
+          <p class="font-bold text-text text-xl mb-2">Extra Life</p>
+          <p class="text-text-light mb-6 flex-1">
+            The ultimate freelancing course for Power Platform professionals — practical strategies for building a sustainable independent consultancy, attracting clients, and maintaining work-life balance.
+          </p>
+          <a
+            href="https://francomusso.com/extralife"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block bg-secondary text-gray-900 px-6 py-2.5 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+          >
+            Learn more<span class="sr-only"> (opens in new tab)</span>
           </a>
         </div>
       </div>

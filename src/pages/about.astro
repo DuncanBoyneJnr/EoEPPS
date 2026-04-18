@@ -187,7 +187,7 @@ const displayRoles: Record<string, { role: string; company: string }> = {
       <div class="w-full h-px bg-border mb-16" aria-hidden="true"></div>
 
       <!-- Rest of the team -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6">
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6">
         {team.map((person) => {
           const { role, company } = displayRoles[person.slug];
           const initials = person.data.name.split(' ').map((n: string) => n[0]).join('');

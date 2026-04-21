@@ -1,0 +1,166 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+---
+
+<BaseLayout title="Venue &amp; Getting Here" description="Find out where EoEPPS 2026 is held and how to get to our venues in Norwich.">
+  <Hero
+    title="Venue &amp; Getting Here"
+    subtitle="Both days at the same venue in the heart of Norwich."
+  />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+          <div class="venue-card bg-white rounded-xl shadow-lg border border-border overflow-hidden">
+            <div class="bg-gradient-to-r from-primary to-primary-dark px-6 py-4">
+              <span class="text-white/80 text-sm font-semibold uppercase tracking-wider">Day 1 &mdash; Friday 1st May</span>
+              <h2 class="text-white text-2xl font-bold mt-1">Workshop Day</h2>
+            </div>
+            <div class="p-6">
+              <div class="flex items-start mb-4">
+                <svg class="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <div>
+                  <p class="font-bold text-text">The Digital Hub, Townshend House</p>
+                  <p class="text-text-light">30 Crown Road<br />Norwich<br />NR1 3DT</p>
+                </div>
+              </div>
+              <div class="flex items-start mb-4">
+                <svg class="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-text-light">9:00 AM &ndash; 4:30 PM</p>
+              </div>
+              <p class="text-text-light text-sm mb-5">A professional conference centre in central Norwich, a short walk from Norwich Railway Station.</p>
+              <a href="https://maps.google.com/maps?q=Townshend+House+30+Crown+Road+Norwich+NR1+3DT" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-primary hover:text-primary-dark font-semibold transition-colors text-sm">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                Open in Google Maps<span class="sr-only"> (opens in new tab)</span>
+              </a>
+            </div>
+          </div>
+          <div class="venue-card bg-white rounded-xl shadow-lg border border-border overflow-hidden">
+            <div class="bg-gradient-to-r from-accent to-primary px-6 py-4">
+              <span class="text-white/80 text-sm font-semibold uppercase tracking-wider">Day 2 &mdash; Saturday 2nd May</span>
+              <h2 class="text-white text-2xl font-bold mt-1">Conference Day</h2>
+            </div>
+            <div class="p-6">
+              <div class="flex items-start mb-4">
+                <svg class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <div>
+                  <p class="font-bold text-text">The Digital Hub, Townshend House</p>
+                  <p class="text-text-light">30 Crown Road<br />Norwich<br />NR1 3DT</p>
+                </div>
+              </div>
+              <div class="flex items-start mb-4">
+                <svg class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-text-light">8:00 AM &ndash; 5:30 PM</p>
+              </div>
+              <p class="text-text-light text-sm mb-5">The same venue as Day 1 — fully accessible and well served by public transport, a short walk from Norwich Railway Station.</p>
+              <a href="https://share.google/0XFQL3ShPVJXjfstT" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-accent hover:text-accent/80 font-semibold transition-colors text-sm">
+                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                Open in Google Maps<span class="sr-only"> (opens in new tab)</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-16 bg-background-alt">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-text mb-4 text-center">Getting Here</h2>
+        <p class="text-text-light text-lg text-center mb-12 max-w-2xl mx-auto">The venue is in central Norwich and easy to reach by train, bus, car, or bike.</p>
+        <div class="grid md:grid-cols-2 gap-6">
+
+          <div class="transport-card bg-white rounded-xl p-6 border border-border shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8M8 11h8M6 3h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2zM9 19v2m6-2v2" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-text">By Train</h3>
+            </div>
+            <p class="text-text-light mb-3">Norwich Railway Station is well connected to London Liverpool Street (under 2 hours), Cambridge, Ely, and other regional hubs.</p>
+            <p class="text-text-light mb-3"><strong class="text-text">From the station:</strong> The venue is approximately a 10&ndash;15 minute walk, or a short taxi or bus ride.</p>
+            <p class="text-text-light text-sm">Greater Anglia operates most services into Norwich. Book in advance for the best fares.</p>
+          </div>
+
+          <div class="transport-card bg-white rounded-xl p-6 border border-border shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2-1h7l1 1z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 6h4l4 5v5h-4" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-text">By Car</h3>
+            </div>
+            <p class="text-text-light mb-3">Norwich is accessible via the A11 from Cambridge and London, the A47 from the Midlands, and the A140 from Ipswich.</p>
+            <p class="text-text-light mb-3"><strong class="text-text">Parking:</strong> Several city-centre car parks are close to the venue, including Rouen Road and St. Andrews multi-storey.</p>
+            <p class="text-text-light text-sm">Norwich city centre has a traffic-free zone &mdash; use a sat-nav and follow signs for the nearest car park.</p>
+          </div>
+          <div class="transport-card bg-white rounded-xl p-6 border border-border shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6v12M3 12h18M3 6h18a2 2 0 012 2v8a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-text">By Bus</h3>
+            </div>
+            <p class="text-text-light mb-3">Norwich has a comprehensive bus network. The bus station on Queen&#39;s Road is near the railway station, and the venue is served by multiple routes.</p>
+            <p class="text-text-light text-sm">First Eastern Counties and Konectbus operate most services. Check the Traveline East Anglia journey planner for live route information.</p>
+          </div>
+
+          <div class="transport-card bg-white rounded-xl p-6 border border-border shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v1m0 0l-3 7m3-7l3 7m-6.5 0a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm9 0a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-text">By Bike</h3>
+            </div>
+            <p class="text-text-light mb-3">Norwich is a bike-friendly city with cycle paths and routes into the centre. The venue has cycle parking nearby.</p>
+            <p class="text-text-light text-sm">If travelling by train, Greater Anglia allows cycles on board &mdash; check their booking options when reserving your seat.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl p-8 flex items-start gap-6">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-text mb-2">Accessibility</h3>
+            <p class="text-text-light">The venue is step-free accessible. If you have any specific accessibility requirements, please <a href="/contact" class="text-primary hover:underline font-medium">get in touch</a> and we will do everything we can to help make your visit comfortable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

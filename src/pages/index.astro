@@ -35,33 +35,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <img src="/images/Logo.png" alt="EoEPPS Logo" width="320" height="320" class="relative w-48 sm:w-60 lg:w-72 h-auto drop-shadow-2xl" />
           </div>
 
-          <!-- Featured Sponsor Card -->
-          <a
-            id="featured-sponsor-link"
-            href="https://www.untethered365.com/freetraining?utm_source=conference&utm_medium=conference&utm_content=norfolk-summit"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-full max-w-xs rounded-2xl overflow-hidden border-2 border-secondary/60 shadow-xl shadow-secondary/20 hover:border-secondary hover:shadow-secondary/40 hover:-translate-y-0.5 transition-all duration-200"
-            aria-label="Featured Sponsor: Untethered 365 (opens in new tab)"
-          >
-            <div class="bg-secondary/20 backdrop-blur-sm px-4 py-2 flex items-center justify-center gap-2 border-b border-secondary/30">
-              <svg class="w-3.5 h-3.5 text-secondary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-              <span class="text-secondary text-xs font-bold uppercase tracking-widest">Featured Sponsor</span>
-              <svg class="w-3.5 h-3.5 text-secondary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            </div>
-            <div id="featured-sponsor-bg" class="px-8 py-6 flex items-center justify-center" style="background-color: #0d1b35;">
+          <!-- Featured Sponsor -->
+          <div class="text-center">
+            <p class="text-secondary text-xs font-bold uppercase tracking-widest mb-3">⭐ Featured Sponsor ⭐</p>
+            <a
+              id="featured-sponsor-link"
+              href="https://www.untethered365.com/freetraining?utm_source=conference&utm_medium=conference&utm_content=norfolk-summit"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block hover:opacity-80 hover:-translate-y-0.5 transition-all duration-200"
+              aria-label="Featured Sponsor: Untethered 365 (opens in new tab)"
+            >
               <img
                 id="featured-sponsor-img"
                 src="/images/sponsors/Untethered365.png"
                 alt="Untethered 365"
-                class="h-14 w-auto object-contain"
+                class="h-16 w-auto object-contain drop-shadow-xl"
               />
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
 
         <!-- Left: Text -->
@@ -521,14 +513,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   if (featuredSponsors.length > 1) {
     let current = 0;
     const link = document.getElementById('featured-sponsor-link') as HTMLAnchorElement | null;
-    const bg = document.getElementById('featured-sponsor-bg') as HTMLElement | null;
     const img = document.getElementById('featured-sponsor-img') as HTMLImageElement | null;
 
     setInterval(() => {
       current = (current + 1) % featuredSponsors.length;
       const s = featuredSponsors[current];
       if (link) { link.href = s.href; link.setAttribute('aria-label', `Featured Sponsor: ${s.name} (opens in new tab)`); }
-      if (bg) bg.style.backgroundColor = s.bgColor;
       if (img) { img.src = s.logo; img.alt = s.name; }
     }, 8000);
   }

@@ -519,6 +519,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       href: 'https://www.untethered365.com/freetraining?utm_source=conference&utm_medium=conference&utm_content=norfolk-summit',
       cta: 'Join free training',
     },
+    {
+      name: 'GTP Tech Recruitment',
+      logo: '/images/sponsors/GTP-Tech.png',
+      href: 'https://gtptech.co.uk/',
+      cta: 'Visit gtptech.co.uk',
+    },
+    {
+      name: 'Powercademy',
+      logo: '/images/sponsors/Powercademy.png',
+      href: 'https://www.powercademy.com/',
+      cta: 'Visit powercademy.com',
+    },
+    {
+      name: 'Power Pages Mastery',
+      logo: '/images/sponsors/PowerPagesMastery.png',
+      href: 'https://francomusso.com/power-pages-course',
+      cta: 'Learn more',
+    },
+    {
+      name: 'Extra Life',
+      logo: '/images/sponsors/ExtraLife.png',
+      href: 'https://francomusso.com/extralife',
+      cta: 'Learn more',
+    },
+    {
+      name: 'Experts Live UK',
+      logo: '/images/sponsors/ExpertsLiveUK.png',
+      href: 'https://eluk26.expertslive.co.uk/',
+      cta: 'Visit expertslive.co.uk',
+    },
   ];
 
   if (featuredSponsors.length > 1) {
@@ -533,7 +563,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (link) { link.href = s.href; link.setAttribute('aria-label', `Featured Sponsor: ${s.name} (opens in new tab)`); }
       if (cta) { cta.href = s.href; cta.textContent = s.cta; }
       if (img) { img.src = s.logo; img.alt = s.name; }
-    }, 8000);
+    }, 15000);
   }
 </script>
 

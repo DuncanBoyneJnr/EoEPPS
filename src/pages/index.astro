@@ -53,6 +53,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 class="h-16 w-auto object-contain drop-shadow-xl"
               />
             </a>
+            <div class="mt-3">
+              <a
+                id="featured-sponsor-cta"
+                href="https://www.untethered365.com/freetraining?utm_source=conference&utm_medium=conference&utm_content=norfolk-summit"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-secondary text-gray-900 px-6 py-2.5 rounded-lg font-semibold hover:opacity-90 transition-opacity text-sm"
+              >
+                Join free training<span class="sr-only"> (opens in new tab)</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -506,19 +517,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       name: 'Untethered 365',
       logo: '/images/sponsors/Untethered365.png',
       href: 'https://www.untethered365.com/freetraining?utm_source=conference&utm_medium=conference&utm_content=norfolk-summit',
-      bgColor: '#0d1b35',
+      cta: 'Join free training',
     },
   ];
 
   if (featuredSponsors.length > 1) {
     let current = 0;
     const link = document.getElementById('featured-sponsor-link') as HTMLAnchorElement | null;
+    const cta = document.getElementById('featured-sponsor-cta') as HTMLAnchorElement | null;
     const img = document.getElementById('featured-sponsor-img') as HTMLImageElement | null;
 
     setInterval(() => {
       current = (current + 1) % featuredSponsors.length;
       const s = featuredSponsors[current];
       if (link) { link.href = s.href; link.setAttribute('aria-label', `Featured Sponsor: ${s.name} (opens in new tab)`); }
+      if (cta) { cta.href = s.href; cta.textContent = s.cta; }
       if (img) { img.src = s.logo; img.alt = s.name; }
     }, 8000);
   }

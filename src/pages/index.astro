@@ -551,20 +551,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     },
   ];
 
-  if (featuredSponsors.length > 1) {
-    let current = 0;
+  const HOUR_MS = 60 * 60 * 1000;
+
+  function getSponsorIndex() {
+    try {
+      const stored = localStorage.getItem('featuredSponsor');
+      if (stored) {
+        const { index, setAt } = JSON.parse(stored);
+        const elapsed = Date.now() - setAt;
+        const advanced = Math.floor(elapsed / HOUR_MS);
+        const next = (index + advanced) % featuredSponsors.length;
+        if (advanced > 0) {
+          localStorage.setItem('featuredSponsor', JSON.stringify({ index: next, setAt: setAt + advanced * HOUR_MS }));
+        }
+        return next;
+      }
+    } catch {}
+    const initial = { index: 0, setAt: Date.now() };
+    localStorage.setItem('featuredSponsor', JSON.stringify(initial));
+    return 0;
+  }
+
+  function applySponsor(index: number) {
+    const s = featuredSponsors[index];
     const link = document.getElementById('featured-sponsor-link') as HTMLAnchorElement | null;
     const cta = document.getElementById('featured-sponsor-cta') as HTMLAnchorElement | null;
     const img = document.getElementById('featured-sponsor-img') as HTMLImageElement | null;
-
-    setInterval(() => {
-      current = (current + 1) % featuredSponsors.length;
-      const s = featuredSponsors[current];
-      if (link) { link.href = s.href; link.setAttribute('aria-label', `Featured Sponsor: ${s.name} (opens in new tab)`); }
-      if (cta) { cta.href = s.href; cta.textContent = s.cta; }
-      if (img) { img.src = s.logo; img.alt = s.name; }
-    }, 15000);
+    if (link) { link.href = s.href; link.setAttribute('aria-label', `Featured Sponsor: ${s.name} (opens in new tab)`); }
+    if (cta) { cta.href = s.href; cta.textContent = s.cta; }
+    if (img) { img.src = s.logo; img.alt = s.name; }
   }
+
+  applySponsor(getSponsorIndex());
+
+  // Check every minute whether an hour has passed and rotate if so
+  setInterval(() => { applySponsor(getSponsorIndex()); }, 60 * 1000);
 </script>
 
 </BaseLayout>

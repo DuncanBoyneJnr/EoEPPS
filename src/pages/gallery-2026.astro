@@ -1,5 +1,5 @@
 ---
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
@@ -19,22 +19,28 @@ const toTitle = (fileName: string) => {
   return cleaned || 'EoEPPS 2026 gallery photo';
 };
 
-const getSortRank = (fileName: string) => {
-  const match = fileName.match(/^(\d+)/);
-  return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
-};
-
 const photos = existsSync(galleryDir)
   ? readdirSync(galleryDir, { withFileTypes: true })
       .filter((entry) => entry.isFile())
-      .map((entry) => entry.name)
-      .filter((fileName) => imageExtensions.has(fileName.slice(fileName.lastIndexOf('.')).toLowerCase()))
-      .filter((fileName) => !hiddenNamePattern.test(fileName))
-      .sort((a, b) => {
-        const rankDifference = getSortRank(a) - getSortRank(b);
-        return rankDifference || a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+      .map((entry) => {
+        const fileName = entry.name;
+        const filePath = join(galleryDir, fileName);
+        const leadingNumber = fileName.match(/^(\d+)/);
+        return {
+          fileName,
+          rank: leadingNumber ? Number(leadingNumber[1]) : Number.MAX_SAFE_INTEGER,
+          size: statSync(filePath).size,
+        };
       })
-      .map((fileName, index) => ({
+      .filter(({ fileName }) => imageExtensions.has(fileName.slice(fileName.lastIndexOf('.')).toLowerCase()))
+      .filter(({ fileName }) => !hiddenNamePattern.test(fileName))
+      .sort((a, b) => {
+        if (a.rank !== b.rank) return a.rank - b.rank;
+        // both are numbered files — already distinct
+        // both are unnumbered — sort by file size ascending
+        return a.size - b.size;
+      })
+      .map(({ fileName }, index) => ({
         src: encodeURI(`/images/gallery/2026/${fileName}`),
         alt: `${toTitle(fileName)} - EoEPPS 2026 photo ${index + 1}`,
       }))

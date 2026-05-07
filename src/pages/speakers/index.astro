@@ -2,13 +2,13 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Speakers" description="Meet the expert Power Platform speakers at EoEPPS 2026 — practitioners from across the East of England and beyond sharing real-world experience with Power Apps, Power Automate, Power BI, and Copilot Studio.">
+<BaseLayout title="2026 Speakers" description="Meet the expert Power Platform speakers from EoEPPS 2026 — practitioners from across the East of England and beyond who shared real-world experience with Power Apps, Power Automate, Power BI, and Copilot Studio.">
 
   <!-- Combined hero + keynote — single banner -->
   <section class="bg-gradient-to-br from-primary via-primary-dark to-accent text-white py-16 md:py-24">
     <div class="container mx-auto px-4 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-2">Speakers</h1>
-      <p class="text-white/80 text-lg mb-12">Inspiring voices from the Power Platform community.</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-2">2026 Speakers</h1>
+      <p class="text-white/80 text-lg mb-12">The inspiring voices from EoEPPS 2026.</p>
 
       <div class="border-t border-white/20 pt-12">
         <p class="text-secondary font-bold uppercase tracking-widest text-sm mb-6">Keynote Speaker</p>
@@ -44,7 +44,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-text mb-4">Conference Speakers</h2>
         <p class="text-text-light text-lg max-w-2xl mx-auto">
-          Click any speaker to learn more about them and see which sessions they're presenting.
+          Click any speaker to learn more about them and the sessions they presented at EoEPPS 2026.
         </p>
       </div>
       <link rel="stylesheet" href="https://sessionize.com/api/v2/9q20ek5l/embedstyle" />
@@ -55,18 +55,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <!-- Modal container required by Sessionize -->
   <div id="sz-modal-container" class="is-hidden"></div>
 
-  <!-- View Schedule CTA -->
+  <!-- EoEPPS 2027 CTA -->
   <section class="py-16 bg-primary text-white">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-4">Ready to Plan Your Day?</h2>
+      <h2 class="text-3xl font-bold mb-4">EoEPPS Returns in 2027</h2>
       <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-        View the full schedule to see when each session is on and which tracks to choose from.
+        Follow us on LinkedIn to be the first to hear about EoEPPS 2027 — save the date, speakers, and how to get involved.
       </p>
       <a
-        href="/schedule"
+        href="https://www.linkedin.com/company/eoepps/"
+        target="_blank"
+        rel="noopener noreferrer"
         class="inline-block bg-white text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors"
       >
-        View the Schedule
+        Follow on LinkedIn<span class="sr-only"> (opens in new tab)</span>
       </a>
     </div>
   </section>

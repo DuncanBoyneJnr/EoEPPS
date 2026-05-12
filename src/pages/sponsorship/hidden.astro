@@ -78,7 +78,7 @@ import Hero from '../../components/Hero.astro';
         <div class="text-center">
           <div class="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 116 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
           </div>
           <h3 class="text-xl font-bold mb-3">The Audience</h3>
@@ -132,35 +132,40 @@ import Hero from '../../components/Hero.astro';
       </div>
 
       <!-- Comparison Matrix -->
-      <div class="max-w-5xl mx-auto mb-16">
+      <div class="max-w-6xl mx-auto mb-16">
         <h3 class="text-2xl font-bold text-text mb-8 text-center">Compare All Packages</h3>
         <div class="overflow-x-auto rounded-2xl border border-primary/20 shadow-sm">
-          <table class="w-full text-sm min-w-[700px]">
+          <table class="w-full text-sm min-w-[860px]">
             <thead>
               <tr>
                 <th class="text-left py-5 px-5 bg-primary/5 font-semibold text-text border-b border-primary/20">Benefit</th>
-                <th class="py-5 px-3 bg-primary text-white font-semibold text-center border-b border-primary/20 w-32">
+                <th class="py-5 px-3 bg-primary/60 text-white font-semibold text-center border-b border-primary/20 w-24">
+                  <div class="text-white/70 text-xs uppercase tracking-wider mb-1">Friend</div>
+                  <div class="text-xl font-bold">£250</div>
+                </th>
+                <th class="py-5 px-3 bg-primary text-white font-semibold text-center border-b border-primary/20 w-24">
                   <div class="text-white/70 text-xs uppercase tracking-wider mb-1">Community</div>
-                  <div class="text-xl font-bold">£1,000</div>
+                  <div class="text-xl font-bold">£750</div>
                 </th>
-                <th class="py-5 px-3 bg-gray-600 text-white font-semibold text-center border-b border-gray-500 w-32">
+                <th class="py-5 px-3 bg-gray-600 text-white font-semibold text-center border-b border-gray-500 w-24">
                   <div class="text-white/70 text-xs uppercase tracking-wider mb-1">Silver</div>
-                  <div class="text-xl font-bold">£2,000</div>
+                  <div class="text-xl font-bold">£1,500</div>
                 </th>
-                <th class="py-5 px-3 bg-secondary text-gray-900 font-semibold text-center border-b border-secondary/50 w-32">
+                <th class="py-5 px-3 bg-secondary text-gray-900 font-semibold text-center border-b border-secondary/50 w-24">
                   <div class="text-gray-700 text-xs uppercase tracking-wider mb-1">Gold</div>
-                  <div class="text-xl font-bold">£3,500</div>
+                  <div class="text-xl font-bold">£3,000</div>
                 </th>
-                <th class="py-5 px-3 bg-gradient-to-b from-primary to-accent text-white font-semibold text-center border-b border-primary/20 w-32">
+                <th class="py-5 px-3 bg-gradient-to-b from-primary to-accent text-white font-semibold text-center border-b border-primary/20 w-24">
                   <div class="text-white/70 text-xs uppercase tracking-wider mb-1">Platinum</div>
-                  <div class="text-xl font-bold">£6,000</div>
+                  <div class="text-xl font-bold">£5,000</div>
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr><td colspan="5" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Brand &amp; Logo</td></tr>
+              <tr><td colspan="6" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Brand &amp; Logo</td></tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Website logo placement</td>
+                <td class="py-3 text-center text-text text-xs font-semibold">Grouped<br/>panel</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
@@ -168,6 +173,7 @@ import Hero from '../../components/Hero.astro';
               </tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Rotating sponsor slides</td>
+                <td class="py-3 text-center text-text text-xs font-semibold">Shared<br/>slide</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
@@ -175,6 +181,7 @@ import Hero from '../../components/Hero.astro';
               </tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Logo on event roller banners throughout the venue</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
@@ -185,6 +192,7 @@ import Hero from '../../components/Hero.astro';
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
               </tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
@@ -192,12 +200,14 @@ import Hero from '../../components/Hero.astro';
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
               </tr>
 
-              <tr><td colspan="5" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Social Media</td></tr>
+              <tr><td colspan="6" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Social Media</td></tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Sponsor recognition / visibility</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
@@ -208,12 +218,14 @@ import Hero from '../../components/Hero.astro';
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
               </tr>
 
-              <tr><td colspan="5" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Video &amp; Keynote</td></tr>
+              <tr><td colspan="6" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Video &amp; Keynote</td></tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">1-minute video during keynote reel</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
@@ -221,6 +233,7 @@ import Hero from '../../components/Hero.astro';
               </tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Additional video on venue screens throughout the day</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
@@ -228,15 +241,17 @@ import Hero from '../../components/Hero.astro';
               </tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Logo size on rotating sponsor slides</td>
+                <td class="py-3 text-center text-text text-xs font-semibold">Grouped</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">Standard</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">Prominent</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">Featured</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">Headline</td>
               </tr>
 
-              <tr><td colspan="5" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Expo Hall</td></tr>
+              <tr><td colspan="6" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Expo Hall</td></tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Expo hall presence</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
@@ -245,6 +260,7 @@ import Hero from '../../components/Hero.astro';
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Expo space</td>
                 <td class="py-3 text-center text-text-light/40">—</td>
+                <td class="py-3 text-center text-text-light/40">—</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">2m × 2m</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">3m × 3m</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">4m × 4m</td>
@@ -252,14 +268,16 @@ import Hero from '../../components/Hero.astro';
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Expo hall positioning</td>
                 <td class="py-3 text-center text-text-light/40">—</td>
+                <td class="py-3 text-center text-text-light/40">—</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">Standard</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">Premium</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">First choice</td>
               </tr>
 
-              <tr><td colspan="5" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Sponsored Session</td></tr>
+              <tr><td colspan="6" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Sponsored Session</td></tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Sponsored session</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text text-xs font-semibold leading-tight">15 min<br/>conference track</td>
                 <td class="py-3 text-center text-text text-xs font-semibold leading-tight">30 min<br/>conference track</td>
@@ -268,14 +286,16 @@ import Hero from '../../components/Hero.astro';
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Up to 20% promotional / sales content</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
               </tr>
 
-              <tr><td colspan="5" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Attendee Engagement</td></tr>
+              <tr><td colspan="6" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Attendee Engagement</td></tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Workshop tickets</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">1 ticket</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">2 tickets</td>
@@ -284,14 +304,16 @@ import Hero from '../../components/Hero.astro';
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Attendee information access</td>
                 <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
+                <td class="py-3 text-center text-text-light/40 font-bold text-base">✘</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">Post-event</td>
                 <td class="py-3 text-center text-text text-xs font-semibold">Post-event</td>
                 <td class="py-3 text-center text-text text-xs font-semibold leading-tight">Early<br/>access</td>
               </tr>
 
-              <tr><td colspan="5" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Attendee Bags</td></tr>
+              <tr><td colspan="6" class="py-2 px-5 bg-primary/5 text-xs font-semibold uppercase tracking-widest text-primary border-t border-primary/20">Attendee Bags</td></tr>
               <tr class="border-t border-primary/10 hover:bg-primary/5 transition-colors">
                 <td class="py-3 px-5 text-text-light">Branded item in attendee bags <span class="text-xs text-text-light/60">(sponsor-supplied or EoEPPS-arranged — invoiced separately)</span></td>
+                <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
                 <td class="py-3 text-center text-green-600 font-bold text-base">✔</td>
@@ -338,7 +360,7 @@ import Hero from '../../components/Hero.astro';
         </div>
       </div>
 
-      <!-- Tier descriptions: Platinum first, descending to Community -->
+      <!-- Tier descriptions: Platinum first, descending to Friend -->
       <div class="max-w-4xl mx-auto space-y-8 mb-12">
 
         <!-- Platinum -->
@@ -347,7 +369,7 @@ import Hero from '../../components/Hero.astro';
             <div class="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p class="text-white/70 text-sm font-medium uppercase tracking-wider mb-1">Platinum Sponsor</p>
-                <p class="text-4xl font-bold">£6,000</p>
+                <p class="text-4xl font-bold">£5,000</p>
               </div>
               <div class="bg-white/20 rounded-xl px-4 py-2">
                 <p class="text-white text-sm font-bold">Exclusive Headline Sponsor</p>
@@ -366,7 +388,7 @@ import Hero from '../../components/Hero.astro';
           <div class="bg-secondary px-8 py-6">
             <div>
               <p class="text-gray-700 text-sm font-medium uppercase tracking-wider mb-1">Gold Sponsor</p>
-              <p class="text-4xl font-bold text-gray-900">£3,500</p>
+              <p class="text-4xl font-bold text-gray-900">£3,000</p>
             </div>
           </div>
           <div class="p-8">
@@ -381,7 +403,7 @@ import Hero from '../../components/Hero.astro';
           <div class="bg-gray-600 px-8 py-6 text-white">
             <div>
               <p class="text-white/70 text-sm font-medium uppercase tracking-wider mb-1">Silver Sponsor</p>
-              <p class="text-4xl font-bold">£2,000</p>
+              <p class="text-4xl font-bold">£1,500</p>
             </div>
           </div>
           <div class="p-8">
@@ -396,12 +418,27 @@ import Hero from '../../components/Hero.astro';
           <div class="bg-primary px-8 py-6 text-white">
             <div>
               <p class="text-white/70 text-sm font-medium uppercase tracking-wider mb-1">Community Sponsor</p>
-              <p class="text-4xl font-bold">£1,000</p>
+              <p class="text-4xl font-bold">£750</p>
             </div>
           </div>
           <div class="p-8">
             <p class="text-text-light leading-relaxed">
               The Community Sponsor package is designed for organisations, creators, training providers, conferences, and community-focused businesses who want to support East of England Power Platform Summit while gaining visibility within the Microsoft ecosystem. Community Sponsors receive digital and event-wide brand exposure through website placement, keynote recognition, social media promotion, rotating venue screen content, and sponsor showcase videos throughout the event. Sponsors may also include a branded item in attendee bags, either supplied directly by the sponsor or arranged by EoEPPS for an additional cost.
+            </p>
+          </div>
+        </div>
+
+        <!-- Friend of EoEPPS -->
+        <div class="border border-primary/20 rounded-2xl overflow-hidden">
+          <div class="bg-primary/60 px-8 py-6 text-white">
+            <div>
+              <p class="text-white/70 text-sm font-medium uppercase tracking-wider mb-1">Friend of EoEPPS</p>
+              <p class="text-4xl font-bold">£250</p>
+            </div>
+          </div>
+          <div class="p-8">
+            <p class="text-text-light leading-relaxed">
+              An entry-level tier for local businesses, course creators, freelancers, podcasters, and community supporters who want to back EoEPPS 2027. Friends receive a grouped logo placement on the EoEPPS website, inclusion on a shared Friends rotating slide during breaks, and the option to include a branded item in attendee goodie bags (sponsor-supplied).
             </p>
           </div>
         </div>

@@ -1,16 +1,13 @@
 ---
 name: Jon Russell
-title: Speaker Coordinator
+title: Technical Solution Architect
 company: Capgemini
-bio: Jon is a Senior Power Platform Technical Consultant at Capgemini with over 20 years of experience in IT. He's passionate about building communities where people can learn, share, and thrive — running mentoring programs and previously co-hosting the Sprint Zero podcast.
+bio: Technical Solution Architect at Capgemini specialising in Microsoft Dynamics 365, Power Platform, and Azure. Holder of 16 active Microsoft certifications, regular speaker on the UK community circuit, and writer at jondoesflow.com. Jon weaves his neurodivergent identity openly into his professional story and is based in Leighton Buzzard with his wife Katie and their two daughters.
 isOrganizer: true
 linkedin: https://www.linkedin.com/in/jondoesflow/
+website: https://jondoesflow.com
 image: /images/speakers/Jon-Russell.jpg
 presentations: []
 ---
 
-Jon is a Senior Power Platform Technical Consultant at Capgemini with over 20 years of experience in IT and a strong focus on helping others grow in the Microsoft ecosystem. He's passionate about building communities where people can learn, share, and thrive together. Jon runs mentoring programs, contributes to user groups, and was previous co-host of the Sprint Zero podcast, which brought fresh voices and perspectives from across the Power Platform world.
-
-For Jon, the Power Platform isn't just about technology — it's about people, collaboration, and creating opportunities. Whether mentoring new consultants, organising events, or connecting with peers, having recently been diagnosed with ADHD he's always working to make the community stronger and more inclusive.
-
-Jon will be looking after the speakers side of things for EoEPPS. Jon's go-to tools are a solid data model, rapport building, radical candor and a dose of humour.
+Jon is a Technical Solution Architect at Capgemini specialising in Microsoft Dynamics 365, Power Platform, and Azure, with 16 active Microsoft certifications and a regular speaking slot on the UK community circuit. He writes at jondoesflow.com, weaves his neurodivergent identity openly into his professional story, and is exploring freelance consultancy alongside the day job. Based in Leighton Buzzard with his wife Katie (Early Years consultant) and their two daughters.

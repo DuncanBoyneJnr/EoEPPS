@@ -7,7 +7,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://eoepps.co.uk',
   integrations: [
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.endsWith('/HP2/'),
+    }),
   ],
   vite: {
     plugins: [tailwindcss()]
